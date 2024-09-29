@@ -6,6 +6,10 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "blog 퉁이리",
   description: "정충일",
+  openGraph: {
+    title: "blog 퉁이리",
+    siteName: "정충일",
+  },
   keywords: ["블로그", "개발", "퉁이리", "정충일"],
 };
 
@@ -28,7 +32,7 @@ export default function RootLayout({
             </Link>
           </h1>
           <nav>
-            <ul className="flex gap-4">
+            <ul className="flex gap-1">
               <li>
                 <Link href="/about">about</Link>
               </li>

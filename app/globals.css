@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+button,
+a {
+  padding: 16px 20px;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+button:hover,
+a:hover {
+  @apply bg-gray-100;
+}
