@@ -5,6 +5,7 @@
 button,
 a {
   padding: 16px 20px;
+  display: inline-block;
   @apply transition-all duration-300 ease-in-out;
 }
 

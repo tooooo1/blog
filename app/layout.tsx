@@ -24,11 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="p-4">
-        <header className="flex justify-between">
+      <body className="p-2">
+        <header className="flex justify-between items-center">
           <h1>
-            <Link href="/" className="font-semibold">
-              퉁
+            <Link href="/" className="box-border">
+              <img src="./icon.svg" width={30} />
             </Link>
           </h1>
           <nav>
@@ -49,6 +49,9 @@ export default function RootLayout({
         </main>
         <footer className="text-center text-gray-400 text-xs">
           blog. 퉁이리
+          <a target="_blank" href="https://github.com/tooooo1" className="ml-2">
+            GitHub
+          </a>
         </footer>
       </body>
     </html>
