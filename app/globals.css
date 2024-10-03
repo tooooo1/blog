@@ -13,3 +13,9 @@ button:hover,
 a:hover {
   @apply bg-gray-100;
 }
+
+@layer base {
+  body {
+    overscroll-behavior-y: none;
+  }
+}

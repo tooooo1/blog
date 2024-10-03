@@ -6,6 +6,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "blog 퉁이리",
   description: "정충일",
+  metadataBase: new URL("https://tooo1.vercel.app"),
   openGraph: {
     title: "blog 퉁이리",
     siteName: "정충일",
