@@ -14,9 +14,12 @@ dependencies:
   '@next/mdx':
     specifier: ^14.2.14
     version: 14.2.14(@mdx-js/loader@3.0.1)(@mdx-js/react@3.0.1)
-  '@supabase/supabase-js':
-    specifier: ^2.45.4
-    version: 2.45.4
+  '@supabase/ssr':
+    specifier: ^0.5.1
+    version: 0.5.1(@supabase/supabase-js@2.45.4)
+  '@tanstack/react-query':
+    specifier: ^5.59.0
+    version: 5.59.0(react@18.3.1)
   '@types/mdx':
     specifier: ^2.0.13
     version: 2.0.13
@@ -323,6 +326,15 @@ packages:
       - utf-8-validate
     dev: false
 
+  /@supabase/ssr@0.5.1(@supabase/supabase-js@2.45.4):
+    resolution: {integrity: sha512-+G94H/GZG0nErZ3FQV9yJmsC5Rj7dmcfCAwOt37hxeR1La+QTl8cE9whzYwPUrTJjMLGNXoO+1BMvVxwBAbz4g==}
+    peerDependencies:
+      '@supabase/supabase-js': ^2.43.4
+    dependencies:
+      '@supabase/supabase-js': 2.45.4
+      cookie: 0.6.0
+    dev: false
+
   /@supabase/storage-js@2.7.0:
     resolution: {integrity: sha512-iZenEdO6Mx9iTR6T7wC7sk6KKsoDPLq8rdu5VRy7+JiT1i8fnqfcOr6mfF2Eaqky9VQzhP8zZKQYjzozB65Rig==}
     dependencies:
@@ -352,6 +364,19 @@ packages:
     dependencies:
       '@swc/counter': 0.1.3
       tslib: 2.7.0
+    dev: false
+
+  /@tanstack/query-core@5.59.0:
+    resolution: {integrity: sha512-WGD8uIhX6/deH/tkZqPNcRyAhDUqs729bWKoByYHSogcshXfFbppOdTER5+qY7mFvu8KEFJwT0nxr8RfPTVh0Q==}
+    dev: false
+
+  /@tanstack/react-query@5.59.0(react@18.3.1):
+    resolution: {integrity: sha512-YDXp3OORbYR+8HNQx+lf4F73NoiCmCcSvZvgxE29OifmQFk0sBlO26NWLHpcNERo92tVk3w+JQ53/vkcRUY1hA==}
+    peerDependencies:
+      react: ^18 || ^19
+    dependencies:
+      '@tanstack/query-core': 5.59.0
+      react: 18.3.1
     dev: false
 
   /@types/acorn@4.0.6:
@@ -766,6 +791,11 @@ packages:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
     dev: true
+
+  /cookie@0.6.0:
+    resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
+    engines: {node: '>= 0.6'}
+    dev: false
 
   /cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}

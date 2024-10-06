@@ -1,5 +1,7 @@
 import "./globals.css";
 
+import { GlobalProvider } from "@/components/GlobalProvider";
+
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 
@@ -46,7 +48,7 @@ export default function RootLayout({
           </nav>
         </header>
         <main className="flex flex-col min-h-screen justify-center items-center">
-          {children}
+          <GlobalProvider>{children}</GlobalProvider>
         </main>
         <footer className="text-center text-gray-400 text-xs">
           blog. 퉁이리
