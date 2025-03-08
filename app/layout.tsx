@@ -40,6 +40,9 @@ export default function RootLayout({
                 <Link href="/about">about</Link>
               </li>
               <li>
+                <Link href="/scribble">낙서장</Link>
+              </li>
+              <li>
                 <a target="_blank" href="https://www.linkedin.com/in/tooo1">
                   LinkedIn
                 </a>
