@@ -1,3 +1,4 @@
+import components from "@/components/ui";
 import { getScribbles } from "@/utils/getScribbles";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
@@ -35,7 +36,7 @@ export default function ScribblePage({ params }: ScribblePageProps) {
   }
 
   return (
-    <article className="w-full max-w-2xl">
+    <article className="w-full max-w-2xl pb-10">
       <header>
         <div className="flex justify-between items-center mb-2">
           <h1 className="text-2xl font-medium">{scribble.title}</h1>
@@ -67,7 +68,7 @@ export default function ScribblePage({ params }: ScribblePageProps) {
           </figure>
         ) : null}
       </header>
-      <MDXRemote source={scribble.content} />
+      <MDXRemote components={components} source={scribble.content} />
     </article>
   );
 }
