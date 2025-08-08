@@ -6,5 +6,5 @@ export function H3(
     HTMLHeadingElement
   >
 ) {
-  return <h3 className="text-lg font-bold mb-1" {...props} />;
+  return <h3 className="text-lg font-medium mb-1" {...props} />;
 }

@@ -35,7 +35,7 @@ export const getScribbles = () => {
     return {
       date,
       formattedDate,
-      title: data.title || `${formattedDate}의 낙서`,
+      title: data.title || formattedDate,
       description: data.description,
       content,
       image: data.image,

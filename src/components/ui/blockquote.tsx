@@ -7,7 +7,10 @@ export function Blockquote(
   >
 ) {
   return (
-    <blockquote {...props} className="text-gray-600 pl-2 border-l-4">
+    <blockquote
+      {...props}
+      className="text-gray-600 dark:text-gray-300 pl-3 border-l-2 border-gray-200 dark:border-gray-700 italic"
+    >
       {props.children}
     </blockquote>
   );

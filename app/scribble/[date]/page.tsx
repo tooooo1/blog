@@ -13,11 +13,11 @@ export const generateMetadata = async ({ params }: ScribblePageProps) => {
   const scribbles = getScribbles();
 
   const scribble = scribbles.find((scribble) => scribble.date === date);
-  const ogImage = scribble?.image ? scribble.image : "/opengraph-image.jpg";
+  const ogImage = scribble?.image || "/opengraph-image.jpg";
 
   return {
-    title: scribble?.title || `${date}의 낙서`,
-    description: scribble?.description || "낙서장 글입니다.",
+    title: scribble?.title || date,
+    description: scribble?.description || "기록",
     openGraph: {
       publishedTime: scribble?.date,
       images: [ogImage],
@@ -42,14 +42,14 @@ export default function ScribblePage({ params }: ScribblePageProps) {
           <h1 className="text-2xl font-medium">{scribble.title}</h1>
           <Link
             href="/scribble"
-            className="text-sm text-gray-500 hover:text-gray-700"
+            className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
           >
             ← 낙서장으로 돌아가기
           </Link>
         </div>
         <time
           dateTime={scribble.date}
-          className="text-gray-500 text-sm block mb-4"
+          className="text-gray-500 dark:text-gray-400 text-sm block mb-4"
         >
           {scribble.formattedDate}
         </time>

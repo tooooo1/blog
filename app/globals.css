@@ -19,15 +19,41 @@
 }
 
 @layer utilities {
-  button,
-  a {
-    padding: 16px 20px;
-    display: inline-block;
-  }
 }
 
 @layer base {
   body {
     overscroll-behavior-y: none;
+    color: #1f2937;
+    background: #ffffff;
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+    --fg: #1f2937;
+    --muted: #6b7280;
+    --bg: #ffffff;
+    --border: #e5e7eb;
+    --code-bg: #f3f4f6;
+    --code-fg: #111827;
+  }
+}
+
+@layer base {
+  @media (prefers-color-scheme: dark) {
+    body {
+      color: #e5e7eb;
+      background: #0b0b0b;
+    }
+    :root {
+      --fg: #e5e7eb;
+      --muted: #9ca3af;
+      --bg: #0b0b0b;
+      --border: #1f2937;
+      --code-bg: #111827;
+      --code-fg: #e5e7eb;
+    }
   }
 }

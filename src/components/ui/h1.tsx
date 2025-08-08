@@ -6,5 +6,7 @@ export function H1(
     HTMLHeadingElement
   >
 ) {
-  return <h1 className="text-2xl font-bold mb-2" {...props} />;
+  return (
+    <h1 className="text-2xl font-semibold tracking-tight mb-2" {...props} />
+  );
 }
