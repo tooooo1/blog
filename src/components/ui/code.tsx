@@ -5,7 +5,7 @@ export const InlineCode = (
 ) => {
   return (
     <code
-      className="rounded bg-gray-50 dark:bg-gray-800 px-1.5 py-0.5 text-sm font-mono text-gray-800 dark:text-gray-100"
+      className="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-md text-[0.875em] font-mono text-gray-800 dark:text-gray-200 font-medium border border-gray-200 dark:border-gray-600"
       {...props}
     />
   );
@@ -16,7 +16,7 @@ export const Pre = (
 ) => {
   return (
     <pre
-      className="rounded-lg bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 p-4 overflow-x-auto text-sm"
+      className="my-8 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-6 overflow-x-auto text-sm leading-relaxed font-mono border border-gray-200 dark:border-gray-600 shadow-sm"
       {...props}
     />
   );

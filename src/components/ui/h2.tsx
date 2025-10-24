@@ -6,5 +6,10 @@ export function H2(
     HTMLHeadingElement
   >
 ) {
-  return <h2 className="text-xl font-semibold mb-1" {...props} />;
+  return (
+    <h2
+      className="text-3xl font-bold mb-6 mt-20 text-gray-900 dark:text-white leading-tight scroll-mt-20"
+      {...props}
+    />
+  );
 }

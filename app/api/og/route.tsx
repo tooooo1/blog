@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { SITE_CONFIG } from "@/constants/site";
 
 export const runtime = "edge";
 
@@ -17,33 +18,49 @@ export async function GET(request: Request) {
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
-            justifyContent: "center",
+            justifyContent: "space-between",
             backgroundColor: "#fff",
             padding: "80px",
           }}
         >
-          <div
-            style={{
-              fontSize: 60,
-              fontWeight: 700,
-              color: "#000",
-              marginBottom: 20,
-              lineHeight: 1.2,
-            }}
-          >
-            {title}
-          </div>
-          {description && (
+          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
             <div
               style={{
-                fontSize: 30,
-                color: "#666",
-                lineHeight: 1.4,
+                fontSize: 64,
+                fontWeight: 700,
+                color: "#111827",
+                lineHeight: 1.2,
+                maxWidth: "90%",
               }}
             >
-              {description}
+              {title}
             </div>
-          )}
+            {description && (
+              <div
+                style={{
+                  fontSize: 28,
+                  color: "#6b7280",
+                  lineHeight: 1.4,
+                  maxWidth: "80%",
+                }}
+              >
+                {description}
+              </div>
+            )}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "16px",
+              fontSize: 24,
+              color: "#9ca3af",
+            }}
+          >
+            <div>{SITE_CONFIG.author.name}</div>
+            <div style={{ fontSize: 16 }}>•</div>
+            <div style={{ fontSize: 20 }}>{SITE_CONFIG.name}</div>
+          </div>
         </div>
       ),
       {

@@ -16,7 +16,7 @@ export default function BlogPage() {
     <div className="w-full max-w-2xl">
       {/* Categories */}
       {categories.length > 0 && (
-        <section className="mb-12">
+        <section className="mb-6">
           <h2 className="text-sm font-medium mb-4 text-[color:var(--muted)]">
             Categories
           </h2>

@@ -6,5 +6,11 @@ export const Img = (
     HTMLImageElement
   >
 ) => {
-  return <img className="rounded-lg" {...props} />;
+  return (
+    <img
+      className="rounded-xl my-8 w-full shadow-md"
+      loading="lazy"
+      {...props}
+    />
+  );
 };

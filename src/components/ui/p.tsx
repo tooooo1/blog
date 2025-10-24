@@ -7,6 +7,9 @@ export const P = (
   >
 ) => {
   return (
-    <p className="leading-7 text-gray-700 dark:text-gray-300" {...props} />
+    <p
+      className="leading-relaxed mb-6 text-gray-700 dark:text-gray-300 text-base"
+      {...props}
+    />
   );
 };

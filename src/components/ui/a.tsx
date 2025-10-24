@@ -10,7 +10,7 @@ export const Anchor = (
   const { href, children, className = "", ...rest } = props;
 
   const base =
-    "underline underline-offset-4 decoration-gray-300 hover:decoration-gray-500 dark:decoration-gray-600 dark:hover:decoration-gray-400";
+    "text-blue-600 dark:text-blue-400 underline underline-offset-2 hover:text-blue-700 dark:hover:text-blue-300 transition-colors";
 
   if (!href) return <span className={base}>{children}</span>;
 
