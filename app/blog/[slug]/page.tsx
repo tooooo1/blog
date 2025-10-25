@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import * as UI from "@/components/ui";
+import mdxComponents from "@/components/ui/mdx-components";
 import { BlogPostStructuredData } from "@/components/StructuredData";
 import { SITE_CONFIG } from "@/constants/site";
 
@@ -113,7 +114,7 @@ export default function PostPage({ params }: PostPageProps) {
 
         {/* Post Content */}
         <div className="prose prose-gray dark:prose-invert max-w-none pb-24">
-          <MDXRemote source={post.content} components={UI} />
+          <MDXRemote source={post.content} components={{...mdxComponents, ...UI}} />
         </div>
 
         {/* Back to Blog */}

@@ -8,10 +8,10 @@ interface CalloutProps {
 }
 
 const calloutStyles: Record<CalloutType, string> = {
-  aha: "bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/50",
-  info: "bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-600/50",
-  warning: "bg-orange-50 dark:bg-orange-950/30 border border-orange-200 dark:border-orange-800/50",
-  tip: "bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50",
+  aha: "bg-blue-50 dark:bg-blue-900/20",
+  info: "bg-gray-50 dark:bg-gray-800/40", 
+  warning: "bg-orange-50 dark:bg-orange-900/20",
+  tip: "bg-green-50 dark:bg-green-900/20",
 };
 
 const calloutIcons: Record<CalloutType, string> = {
@@ -31,15 +31,15 @@ const calloutLabels: Record<CalloutType, string> = {
 export function Callout({ type = "info", children }: CalloutProps) {
   return (
     <div
-      className={`my-8 rounded-xl p-6 ${calloutStyles[type]}`}
+      className={`my-6 rounded-2xl p-5 ${calloutStyles[type]}`}
       role="note"
       aria-label={calloutLabels[type]}
     >
-      <div className="flex gap-4">
-        <span className="text-xl flex-shrink-0 mt-1" aria-hidden="true">
+      <div className="flex gap-3 items-start">
+        <span className="text-lg flex-shrink-0" aria-hidden="true">
           {calloutIcons[type]}
         </span>
-        <div className="flex-1 text-gray-700 dark:text-gray-200 leading-relaxed text-base">
+        <div className="flex-1 text-gray-800 dark:text-gray-100 leading-7 text-[15px]">
           {children}
         </div>
       </div>

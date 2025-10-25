@@ -7,11 +7,11 @@ interface TimelineItemProps {
 
 export function TimelineItem({ time, children }: TimelineItemProps) {
   return (
-    <div className="flex gap-8 my-4">
-      <div className="font-mono text-sm font-medium text-gray-500 dark:text-gray-500 w-28 flex-shrink-0">
+    <div className="flex gap-6 my-4">
+      <div className="font-mono text-sm font-medium text-gray-500 dark:text-gray-500 min-w-[140px] flex-shrink-0">
         {time}
       </div>
-      <div className="flex-1 text-gray-700 dark:text-gray-300 leading-relaxed">
+      <div className="flex-1 text-gray-800 dark:text-gray-200 leading-7">
         {children}
       </div>
     </div>
