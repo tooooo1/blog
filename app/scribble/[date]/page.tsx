@@ -36,7 +36,7 @@ export default function ScribblePage({ params }: ScribblePageProps) {
   }
 
   return (
-    <article className="w-full max-w-2xl pb-10">
+    <article className="w-full max-w-2xl px-4 pb-10">
       <header>
         <div className="flex justify-between items-center mb-2">
           <h1 className="text-2xl font-medium">{scribble.title}</h1>

@@ -21,5 +21,10 @@ export const CATEGORIES: Record<string, Category> = {
     name: "Network",
     description: "네트워크",
   },
+  retrospective: {
+    id: "retrospective",
+    name: "회고",
+    description: "회고록",
+  },
   // ... more categories
 };

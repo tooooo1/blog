@@ -36,7 +36,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   const posts = getPostsByCategory(params.category);
 
   return (
-    <div className="w-full max-w-2xl">
+    <div className="w-full max-w-2xl px-4">
       {/* Breadcrumb */}
       <nav className="mb-8 text-sm text-[color:var(--muted)]">
         <Link href="/blog" className="hover:text-[color:var(--fg)]">

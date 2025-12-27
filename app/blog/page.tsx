@@ -13,7 +13,7 @@ export default function BlogPage() {
   const categories = getCategories();
 
   return (
-    <div className="w-full max-w-2xl">
+    <div className="w-full max-w-2xl px-4">
       {/* Categories */}
       {categories.length > 0 && (
         <section className="mb-6">

@@ -10,7 +10,7 @@ export default function ScribblePage() {
   const scribbles = getScribbles();
 
   return (
-    <article className="w-full max-w-2xl">
+    <article className="w-full max-w-2xl px-4">
       <h1 className="text-2xl font-medium">낙서장</h1>
       <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
         짧게 남기는 생각들

@@ -6,7 +6,7 @@ export default function HomePage() {
   const recentPosts = getAllPosts().slice(0, 5);
 
   return (
-    <div className="w-full max-w-2xl">
+    <div className="w-full max-w-2xl px-4">
       <section className="mb-16">
         <h1 className="text-2xl font-medium mb-2">정충일</h1>
         <p className="text-[color:var(--muted)]">
