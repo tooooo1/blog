@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Header } from "@/components/Header";
 import { WebsiteStructuredData } from "@/components/StructuredData";
 import { SITE_CONFIG } from "@/constants/site";
@@ -37,9 +38,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
 };
@@ -82,8 +83,11 @@ export default function RootLayout({
               LinkedIn
             </a>
           </div>
-          <div>© {new Date().getFullYear()} {SITE_CONFIG.author.name}</div>
+          <div>
+            © {new Date().getFullYear()} {SITE_CONFIG.author.name}
+          </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
