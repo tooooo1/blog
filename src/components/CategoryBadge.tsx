@@ -10,7 +10,7 @@ export function CategoryBadge({ id, name, count }: CategoryBadgeProps) {
   return (
     <Link
       href={`/blog/category/${id}`}
-      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm bg-[color:var(--code-bg)] hover:opacity-70 transition-opacity"
     >
       <span>{name}</span>
       {count !== undefined && (

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkGfm from "remark-gfm";
 
 const prettyCodeOptions = {
@@ -58,19 +57,19 @@ export default async function ScribblePage({ params }: ScribblePageProps) {
           <h1 className="text-2xl font-medium">{scribble.title}</h1>
           <Link
             href="/scribble"
-            className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+            className="text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)]"
           >
             ← 낙서장으로 돌아가기
           </Link>
         </div>
         <time
           dateTime={scribble.date}
-          className="text-gray-500 dark:text-gray-400 text-sm block mb-4"
+          className="text-[color:var(--muted)] text-sm block mb-4"
         >
           {scribble.formattedDate}
         </time>
         {scribble.description ? (
-          <p className="text-gray-600 dark:text-gray-400 italic mb-4">
+          <p className="text-[color:var(--muted)] italic mb-4">
             {scribble.description}
           </p>
         ) : null}
@@ -93,7 +92,6 @@ export default async function ScribblePage({ params }: ScribblePageProps) {
             rehypePlugins: [
               [rehypePrettyCode, prettyCodeOptions],
               rehypeSlug,
-              [rehypeAutolinkHeadings, { behavior: "wrap" }],
             ],
           },
         }}

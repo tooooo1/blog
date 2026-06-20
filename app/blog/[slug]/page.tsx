@@ -11,7 +11,6 @@ import { BlogPostStructuredData } from "@/components/StructuredData";
 import { SITE_CONFIG } from "@/constants/site";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkGfm from "remark-gfm";
 
 const prettyCodeOptions = {
@@ -98,14 +97,14 @@ export default async function PostPage({ params }: PostPageProps) {
         slug={post.slug}
         tags={post.tags}
       />
-      <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <article>
         <header className="mb-16 pt-8">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-[color:var(--fg)] leading-tight">
             {post.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 dark:text-gray-500 mb-12">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-[color:var(--muted)] mb-12">
             {post.publishedAt && (
               <time>{formatDate(post.publishedAt)}</time>
             )}
@@ -114,7 +113,7 @@ export default async function PostPage({ params }: PostPageProps) {
             {post.tags.length > 0 && (
               <>
                 {post.tags.map((tag) => (
-                  <span key={tag} className="text-gray-400 dark:text-gray-600">
+                  <span key={tag} className="text-[color:var(--muted)]">
                     #{tag}
                   </span>
                 ))}
@@ -137,17 +136,16 @@ export default async function PostPage({ params }: PostPageProps) {
                 rehypePlugins: [
                   [rehypePrettyCode, prettyCodeOptions],
                   rehypeSlug,
-                  [rehypeAutolinkHeadings, { behavior: "wrap" }],
                 ],
               },
             }}
           />
         </div>
 
-        <footer className="py-12 border-t border-gray-200 dark:border-gray-800">
+        <footer className="py-12 border-t border-[color:var(--border)]">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)] transition-colors"
           >
             <span>←</span>
             <span>목록으로</span>

@@ -31,7 +31,7 @@ export const Li = (
 ) => {
   return (
     <li
-      className="leading-7 text-gray-800 dark:text-gray-200"
+      className="leading-[1.85] text-[color:var(--fg)]"
       {...props}
     />
   );

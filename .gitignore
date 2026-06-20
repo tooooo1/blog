@@ -8,3 +8,6 @@ node_modules
 # OMC (oh-my-claudecode) local state — not for version control
 .omc/
 .claude/settings.local.json
+
+# Playwright/browser test artifacts
+.playwright-mcp/

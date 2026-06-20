@@ -8,7 +8,7 @@ export function H4(
 ) {
   return (
     <h4
-      className="text-lg font-bold mb-3 mt-8 text-gray-900 dark:text-white leading-tight scroll-mt-20 bg-blue-50 dark:bg-blue-900/20 px-3 py-2 rounded-lg"
+      className="text-lg font-bold mb-3 mt-8 text-[color:var(--fg)] leading-tight scroll-mt-20"
       {...props}
     />
   );

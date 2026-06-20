@@ -8,7 +8,7 @@ export function H2(
 ) {
   return (
     <h2
-      className="text-3xl font-bold mb-6 mt-20 text-gray-900 dark:text-white leading-tight scroll-mt-20"
+      className="text-3xl font-bold mb-6 mt-20 text-[color:var(--fg)] leading-tight scroll-mt-20"
       {...props}
     />
   );

@@ -8,7 +8,7 @@ export const P = (
 ) => {
   return (
     <p
-      className="leading-7 mb-6 text-gray-800 dark:text-gray-200 text-base"
+      className="leading-[1.85] mb-6 text-[color:var(--fg)] text-base"
       {...props}
     />
   );

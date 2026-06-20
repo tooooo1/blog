@@ -12,7 +12,7 @@ export function PostCard({ post }: PostCardProps) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="block py-6 hover:opacity-80 transition-opacity"
+      className="group block py-6"
     >
       <article>
         <h2 className="text-xl font-medium mb-2">{post.title}</h2>

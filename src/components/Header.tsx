@@ -20,8 +20,8 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#0b0b0b]/80 backdrop-blur-md border-b border-gray-200/20 dark:border-gray-800/20">
-      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
+    <header className="sticky top-0 z-50 bg-[color:var(--header-bg)] backdrop-blur-md border-b border-[color:var(--border)]">
+      <div className="max-w-2xl mx-auto px-4 flex justify-between items-center h-16">
         <Link
           href="/"
           className="p-2 -ml-2 hover:opacity-60 transition-opacity"

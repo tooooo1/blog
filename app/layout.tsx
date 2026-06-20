@@ -60,7 +60,7 @@ export default function RootLayout({
       <head>
         <WebsiteStructuredData />
       </head>
-      <body className="flex flex-col min-h-screen text-gray-800 dark:text-gray-200 bg-white dark:bg-[#0b0b0b]">
+      <body className="flex flex-col min-h-screen bg-white dark:bg-[#0b0b0b]">
         <ThemeProvider>
           <Header />
           <main className="flex-1 flex flex-col items-center py-12">

@@ -7,13 +7,6 @@ interface CalloutProps {
   children: ReactNode;
 }
 
-const calloutStyles: Record<CalloutType, string> = {
-  aha: "bg-blue-50 dark:bg-blue-900/20",
-  info: "bg-gray-50 dark:bg-gray-800/40", 
-  warning: "bg-orange-50 dark:bg-orange-900/20",
-  tip: "bg-green-50 dark:bg-green-900/20",
-};
-
 const calloutIcons: Record<CalloutType, string> = {
   aha: "💡",
   info: "ℹ️",
@@ -31,7 +24,7 @@ const calloutLabels: Record<CalloutType, string> = {
 export function Callout({ type = "info", children }: CalloutProps) {
   return (
     <div
-      className={`my-6 rounded-2xl p-5 ${calloutStyles[type]}`}
+      className="my-6 rounded-2xl p-5 bg-[color:var(--code-bg)] border-l-2 border-[color:var(--muted)]"
       role="note"
       aria-label={calloutLabels[type]}
     >
@@ -39,7 +32,7 @@ export function Callout({ type = "info", children }: CalloutProps) {
         <span className="text-lg flex-shrink-0" aria-hidden="true">
           {calloutIcons[type]}
         </span>
-        <div className="flex-1 text-gray-800 dark:text-gray-100 leading-7 text-[15px]">
+        <div className="flex-1 text-[color:var(--fg)] leading-7 text-[15px]">
           {children}
         </div>
       </div>
