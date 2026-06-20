@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Header } from "@/components/Header";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import { WebsiteStructuredData } from "@/components/StructuredData";
 import { SITE_CONFIG } from "@/constants/site";
 
@@ -55,39 +56,41 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <head>
         <WebsiteStructuredData />
       </head>
       <body className="flex flex-col min-h-screen text-gray-800 dark:text-gray-200 bg-white dark:bg-[#0b0b0b]">
-        <Header />
-        <main className="flex-1 flex flex-col items-center py-12">
-          {children}
-        </main>
-        <footer className="mt-12 text-center text-xs text-[color:var(--muted)] pb-8">
-          <div className="flex justify-center gap-4 mb-4">
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={SITE_CONFIG.author.github}
-              className="hover:text-[color:var(--fg)] transition-colors"
-            >
-              GitHub
-            </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href={SITE_CONFIG.author.linkedin}
-              className="hover:text-[color:var(--fg)] transition-colors"
-            >
-              LinkedIn
-            </a>
-          </div>
-          <div>
-            © {new Date().getFullYear()} {SITE_CONFIG.author.name}
-          </div>
-        </footer>
-        <Analytics />
+        <ThemeProvider>
+          <Header />
+          <main className="flex-1 flex flex-col items-center py-12">
+            {children}
+          </main>
+          <footer className="mt-12 text-center text-xs text-[color:var(--muted)] pb-8">
+            <div className="flex justify-center gap-4 mb-4">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={SITE_CONFIG.author.github}
+                className="hover:text-[color:var(--fg)] transition-colors"
+              >
+                GitHub
+              </a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={SITE_CONFIG.author.linkedin}
+                className="hover:text-[color:var(--fg)] transition-colors"
+              >
+                LinkedIn
+              </a>
+            </div>
+            <div>
+              © {new Date().getFullYear()} {SITE_CONFIG.author.name}
+            </div>
+          </footer>
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );

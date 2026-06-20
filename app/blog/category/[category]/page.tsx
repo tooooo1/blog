@@ -1,58 +1,59 @@
-import { getPostsByCategory } from "@/utils/getPosts";
-import { CATEGORIES } from "@/types/blog";
+import { getPostsByCategory, getCategories } from "@/utils/getPosts";
+import { CATEGORY_LABELS, getCategoryLabel } from "@/types/blog";
 import { PostCard } from "@/components/PostCard";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     category: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
-  return Object.keys(CATEGORIES).map((category) => ({
-    category,
-  }));
+  const activeCategories = getCategories();
+  return activeCategories
+    .filter((category) => CATEGORY_LABELS[category] !== undefined)
+    .map((category) => ({ category }));
 }
 
 export async function generateMetadata({ params }: CategoryPageProps) {
-  const category = CATEGORIES[params.category];
-  if (!category) return {};
-
+  const { category } = await params;
+  const label = getCategoryLabel(category);
   return {
-    title: category.name,
-    description: category.description,
+    title: label.name,
+    description: label.description,
   };
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
-  const category = CATEGORIES[params.category];
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { category } = await params;
+  const activeCategories = getCategories();
+  const hasLabel = CATEGORY_LABELS[category] !== undefined;
+  const isActive = activeCategories.includes(category);
 
-  if (!category) {
+  if (!hasLabel && !isActive) {
     notFound();
   }
 
-  const posts = getPostsByCategory(params.category);
+  const label = getCategoryLabel(category);
+  const posts = getPostsByCategory(category);
 
   return (
     <div className="w-full max-w-2xl px-4">
-      {/* Breadcrumb */}
       <nav className="mb-8 text-sm text-[color:var(--muted)]">
         <Link href="/blog" className="hover:text-[color:var(--fg)]">
           blog
         </Link>
         <span className="mx-2">/</span>
-        <span className="text-[color:var(--fg)]">{category.name}</span>
+        <span className="text-[color:var(--fg)]">{label.name}</span>
       </nav>
 
-      {/* Category Header */}
       <header className="mb-12">
-        <h1 className="text-3xl font-bold mb-2">{category.name}</h1>
-        <p className="text-[color:var(--muted)]">{category.description}</p>
+        <h1 className="text-3xl font-bold mb-2">{label.name}</h1>
+        <p className="text-[color:var(--muted)]">{label.description}</p>
       </header>
 
-      {/* Posts */}
       <section>
         {posts.length > 0 ? (
           <div className="divide-y divide-[color:var(--border)]">

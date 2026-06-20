@@ -1,17 +1,28 @@
 import { getAllPosts, getPostBySlug, formatDate, calculateReadingTime } from "@/utils/getPosts";
-import { CATEGORIES } from "@/types/blog";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { MDXRemote } from "next-mdx-remote-client/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import * as UI from "@/components/ui";
+import {
+  H1, H2, H3, H4, P, Blockquote, InlineCode, Ul, Ol, Li, Img, Anchor, Hr,
+  Callout, AhaPoint, InfoBox, Warning, Tip, SourceLink, Timeline, TimelineItem,
+} from "@/components/ui";
 import mdxComponents from "@/components/ui/mdx-components";
 import { BlogPostStructuredData } from "@/components/StructuredData";
 import { SITE_CONFIG } from "@/constants/site";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import remarkGfm from "remark-gfm";
+
+const prettyCodeOptions = {
+  theme: { light: "github-light", dark: "github-dark" },
+  keepBackground: false,
+};
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -22,7 +33,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PostPageProps) {
-  const post = getPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   if (!post) return {};
 
   const ogImage = `${SITE_CONFIG.url}/api/og?title=${encodeURIComponent(
@@ -66,14 +78,14 @@ export async function generateMetadata({ params }: PostPageProps) {
   };
 }
 
-export default function PostPage({ params }: PostPageProps) {
-  const post = getPostBySlug(params.slug);
+export default async function PostPage({ params }: PostPageProps) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const category = CATEGORIES[post.category];
   const readingTime = calculateReadingTime(post.content);
 
   return (
@@ -88,7 +100,6 @@ export default function PostPage({ params }: PostPageProps) {
       />
       <div className="w-full max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <article>
-        {/* Post Header */}
         <header className="mb-16 pt-8">
           <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">
             {post.title}
@@ -112,12 +123,27 @@ export default function PostPage({ params }: PostPageProps) {
           </div>
         </header>
 
-        {/* Post Content */}
         <div className="prose prose-gray dark:prose-invert max-w-none pb-24">
-          <MDXRemote source={post.content} components={{...mdxComponents, ...UI}} />
+          <MDXRemote
+            source={post.content}
+            components={{
+              ...mdxComponents,
+              H1, H2, H3, H4, P, Blockquote, InlineCode, Ul, Ol, Li, Img, Anchor, Hr,
+              Callout, AhaPoint, InfoBox, Warning, Tip, SourceLink, Timeline, TimelineItem,
+            }}
+            options={{
+              mdxOptions: {
+                remarkPlugins: [remarkGfm],
+                rehypePlugins: [
+                  [rehypePrettyCode, prettyCodeOptions],
+                  rehypeSlug,
+                  [rehypeAutolinkHeadings, { behavior: "wrap" }],
+                ],
+              },
+            }}
+          />
         </div>
 
-        {/* Back to Blog */}
         <footer className="py-12 border-t border-gray-200 dark:border-gray-800">
           <Link
             href="/blog"

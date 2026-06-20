@@ -6,11 +6,10 @@ import { H4 } from "./h4";
 import { Anchor } from "./a";
 import { P } from "./p";
 import { Ul, Ol, Li } from "./list";
-import { InlineCode, Pre } from "./code";
+import { InlineCode } from "./code";
 import { Hr } from "./hr";
 import { Img } from "./img";
 
-// MDX default components mapping
 const mdxComponents = {
   blockquote: Blockquote,
   h1: H1,
@@ -23,7 +22,6 @@ const mdxComponents = {
   ol: Ol,
   li: Li,
   code: InlineCode,
-  pre: Pre,
   hr: Hr,
   img: Img,
 };

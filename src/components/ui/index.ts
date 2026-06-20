@@ -10,7 +10,7 @@ export { P } from "./p";
 
 // Content components
 export { Blockquote } from "./blockquote";
-export { InlineCode, Pre } from "./code";
+export { InlineCode } from "./code";
 export { Ul, Ol, Li } from "./list";
 
 // Media components

@@ -9,22 +9,22 @@ export interface Post {
   updatedAt?: string;
 }
 
-export interface Category {
-  id: string;
+export interface CategoryLabel {
   name: string;
   description: string;
 }
 
-export const CATEGORIES: Record<string, Category> = {
+export const CATEGORY_LABELS: Record<string, CategoryLabel> = {
   network: {
-    id: "network",
     name: "Network",
     description: "네트워크",
   },
   retrospective: {
-    id: "retrospective",
     name: "회고",
     description: "회고록",
   },
-  // ... more categories
 };
+
+export function getCategoryLabel(slug: string): CategoryLabel {
+  return CATEGORY_LABELS[slug] ?? { name: slug, description: "" };
+}

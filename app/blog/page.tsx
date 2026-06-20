@@ -1,7 +1,7 @@
 import { getAllPosts, getCategories, getPostsByCategory } from "@/utils/getPosts";
 import { PostCard } from "@/components/PostCard";
 import { CategoryBadge } from "@/components/CategoryBadge";
-import { CATEGORIES } from "@/types/blog";
+import { getCategoryLabel } from "@/types/blog";
 
 export const metadata = {
   title: "Blog",
@@ -14,7 +14,6 @@ export default function BlogPage() {
 
   return (
     <div className="w-full max-w-2xl px-4">
-      {/* Categories */}
       {categories.length > 0 && (
         <section className="mb-6">
           <h2 className="text-sm font-medium mb-4 text-[color:var(--muted)]">
@@ -22,15 +21,13 @@ export default function BlogPage() {
           </h2>
           <div className="flex flex-wrap gap-2">
             {categories.map((categoryId) => {
-              const category = CATEGORIES[categoryId];
-              if (!category) return null;
-
+              const label = getCategoryLabel(categoryId);
               const count = getPostsByCategory(categoryId).length;
               return (
                 <CategoryBadge
                   key={categoryId}
                   id={categoryId}
-                  name={category.name}
+                  name={label.name}
                   count={count}
                 />
               );
@@ -39,7 +36,6 @@ export default function BlogPage() {
         </section>
       )}
 
-      {/* Posts */}
       <section>
         {posts.length > 0 ? (
           <div className="divide-y divide-[color:var(--border)]">

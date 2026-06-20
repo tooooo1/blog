@@ -10,14 +10,3 @@ export const InlineCode = (
     />
   );
 };
-
-export const Pre = (
-  props: DetailedHTMLProps<HTMLAttributes<HTMLPreElement>, HTMLPreElement>
-) => {
-  return (
-    <pre
-      className="my-6 rounded-2xl bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-5 overflow-x-auto text-sm leading-6 font-mono"
-      {...props}
-    />
-  );
-};

@@ -1,15 +1,31 @@
 import components from "@/components/ui";
 import { getScribbles } from "@/utils/getScribbles";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { MDXRemote } from "next-mdx-remote-client/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import remarkGfm from "remark-gfm";
+
+const prettyCodeOptions = {
+  theme: { light: "github-light", dark: "github-dark" },
+  keepBackground: false,
+};
 
 interface ScribblePageProps {
-  params: { date: string };
+  params: Promise<{ date: string }>;
+}
+
+export async function generateStaticParams() {
+  const scribbles = getScribbles();
+  return scribbles.map((scribble) => ({
+    date: scribble.date,
+  }));
 }
 
 export const generateMetadata = async ({ params }: ScribblePageProps) => {
-  const { date } = params;
+  const { date } = await params;
   const scribbles = getScribbles();
 
   const scribble = scribbles.find((scribble) => scribble.date === date);
@@ -25,8 +41,8 @@ export const generateMetadata = async ({ params }: ScribblePageProps) => {
   };
 };
 
-export default function ScribblePage({ params }: ScribblePageProps) {
-  const { date } = params;
+export default async function ScribblePage({ params }: ScribblePageProps) {
+  const { date } = await params;
   const scribbles = getScribbles();
 
   const scribble = scribbles.find((scribble) => scribble.date === date);
@@ -68,7 +84,20 @@ export default function ScribblePage({ params }: ScribblePageProps) {
           </figure>
         ) : null}
       </header>
-      <MDXRemote components={components} source={scribble.content} />
+      <MDXRemote
+        components={components}
+        source={scribble.content}
+        options={{
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [
+              [rehypePrettyCode, prettyCodeOptions],
+              rehypeSlug,
+              [rehypeAutolinkHeadings, { behavior: "wrap" }],
+            ],
+          },
+        }}
+      />
     </article>
   );
 }

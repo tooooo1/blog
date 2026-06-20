@@ -4,3 +4,7 @@ node_modules
 .next
 .env
 .env.local
+
+# OMC (oh-my-claudecode) local state — not for version control
+.omc/
+.claude/settings.local.json
