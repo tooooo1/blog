@@ -11,3 +11,9 @@ node_modules
 
 # Playwright/browser test artifacts
 .playwright-mcp/
+
+# Next.js generated types (regenerated per env; do not commit)
+next-env.d.ts
+
+# Local scratch workspace
+_workspace/
