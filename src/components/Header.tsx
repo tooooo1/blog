@@ -1,92 +1,80 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 
+const NAV_ITEMS = [
+  { href: '/blog', label: 'blog' },
+  { href: '/scribble', label: 'scribble' },
+  { href: '/about', label: 'about' },
+] as const;
+
 export function Header() {
   const pathname = usePathname();
   const { resolvedTheme, setTheme } = useTheme();
-
-  const isActive = (path: string) => {
-    if (path === '/') {
-      return pathname === '/';
-    }
-    return pathname.startsWith(path);
-  };
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[color:var(--header-bg)] backdrop-blur-md border-b border-[color:var(--border)]">
+    <header
+      style={{ viewTransitionName: 'site-header' }}
+      className="sticky top-0 z-50 bg-[color:var(--header-bg)] backdrop-blur-md border-b border-[color:var(--border)]"
+    >
       <div className="max-w-2xl mx-auto px-4 flex justify-between items-center h-16">
         <Link
           href="/"
-          className="p-2 -ml-2 hover:opacity-60 transition-opacity"
+          className="p-2 -ml-2 rounded-full hover:bg-[color:var(--hover-bg)] transition-colors duration-200"
         >
-          <img
+          <Image
             src="/icon.svg"
             width={28}
             height={28}
             alt="home"
-            className="dark:invert"
+            unoptimized
+            className="dark:invert w-7 h-7"
           />
         </Link>
         <nav className="flex items-center gap-1">
-          <ul className="flex gap-4">
-            <li>
-              <Link
-                href="/blog"
-                className={`inline-block px-4 py-2 text-sm transition-colors ${
-                  isActive('/blog')
-                    ? 'text-[color:var(--fg)] font-semibold'
-                    : 'text-[color:var(--muted)] hover:text-[color:var(--fg)]'
-                }`}
-              >
-                <span className="relative inline-block">
-                  <span className="invisible font-semibold" aria-hidden="true">blog</span>
-                  <span className={`absolute inset-0 ${isActive('/blog') ? 'font-semibold' : ''}`}>blog</span>
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/scribble"
-                className={`inline-block px-4 py-2 text-sm transition-colors ${
-                  isActive('/scribble')
-                    ? 'text-[color:var(--fg)] font-semibold'
-                    : 'text-[color:var(--muted)] hover:text-[color:var(--fg)]'
-                }`}
-              >
-                <span className="relative inline-block">
-                  <span className="invisible font-semibold" aria-hidden="true">scribble</span>
-                  <span className={`absolute inset-0 ${isActive('/scribble') ? 'font-semibold' : ''}`}>scribble</span>
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                className={`inline-block px-4 py-2 text-sm transition-colors ${
-                  isActive('/about')
-                    ? 'text-[color:var(--fg)] font-semibold'
-                    : 'text-[color:var(--muted)] hover:text-[color:var(--fg)]'
-                }`}
-              >
-                <span className="relative inline-block">
-                  <span className="invisible font-semibold" aria-hidden="true">about</span>
-                  <span className={`absolute inset-0 ${isActive('/about') ? 'font-semibold' : ''}`}>about</span>
-                </span>
-              </Link>
-            </li>
+          <ul className="flex gap-2">
+            {NAV_ITEMS.map(({ href, label }) => {
+              const active = pathname.startsWith(href);
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className={`inline-block px-4 py-2 text-sm rounded-full transition-colors duration-200 hover:bg-[color:var(--hover-bg)] ${
+                      active
+                        ? 'text-[color:var(--fg)]'
+                        : 'text-[color:var(--muted)] hover:text-[color:var(--fg)]'
+                    }`}
+                  >
+                    <span className="relative inline-block">
+                      <span
+                        className="invisible font-semibold"
+                        aria-hidden="true"
+                      >
+                        {label}
+                      </span>
+                      <span
+                        className={`absolute inset-0 ${active ? 'font-semibold' : ''}`}
+                      >
+                        {label}
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
           <button
             type="button"
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="p-2 ml-1 text-[color:var(--muted)] hover:text-[color:var(--fg)] transition-colors"
+            className="p-2 ml-1 rounded-full text-[color:var(--muted)] transition-colors duration-200 hover:bg-[color:var(--hover-bg)] hover:text-[color:var(--fg)]"
           >
             <svg
               width={18}

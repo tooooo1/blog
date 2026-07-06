@@ -23,6 +23,100 @@
 @layer utilities {
 }
 
+/* View transitions — asymmetric timing: old content leaves fast,
+   new content arrives gently (see Next.js view-transitions guide) */
+:root {
+  --vt-exit: 90ms;
+  --vt-enter: 160ms;
+}
+
+@keyframes vt-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes vt-slide {
+  from {
+    translate: var(--slide-offset) 0;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+
+/* Default cross-fade (header nav, browser back, etc.) */
+::view-transition-old(.page-cross) {
+  animation: var(--vt-exit) ease-in both vt-fade reverse;
+}
+::view-transition-new(.page-cross) {
+  animation: var(--vt-enter) ease-out var(--vt-exit) both vt-fade;
+}
+
+/* Forward: content slides left (going deeper) */
+::view-transition-old(.nav-forward) {
+  --slide-offset: -16px;
+  animation:
+    var(--vt-exit) ease-in both vt-fade reverse,
+    200ms ease-out both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide-offset: 16px;
+  animation:
+    var(--vt-enter) ease-out var(--vt-exit) both vt-fade,
+    200ms ease-out both vt-slide;
+}
+
+/* Back: content slides right (returning) */
+::view-transition-old(.nav-back) {
+  --slide-offset: 16px;
+  animation:
+    var(--vt-exit) ease-in both vt-fade reverse,
+    200ms ease-out both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide-offset: -16px;
+  animation:
+    var(--vt-enter) ease-out var(--vt-exit) both vt-fade,
+    200ms ease-out both vt-slide;
+}
+
+/* Only the page content group animates — the root (background, footer)
+   swaps instantly so the transition feels anchored, not floaty */
+::view-transition-group(root) {
+  animation: none;
+}
+::view-transition-old(root) {
+  display: none;
+}
+::view-transition-new(root) {
+  animation: none;
+}
+
+/* The header is the user's spatial anchor — never animate it */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
 @layer base {
   body {
     overscroll-behavior-y: none;
@@ -42,6 +136,7 @@
     --link: #2563eb;
     --code-bg: rgba(175, 184, 193, 0.2);
     --header-bg: rgba(255, 255, 255, 0.8);
+    --hover-bg: rgba(0, 0, 0, 0.035);
   }
 
   .dark {
@@ -53,6 +148,7 @@
     --link: #60a5fa;
     --code-bg: rgba(255, 255, 255, 0.1);
     --header-bg: rgba(11, 11, 11, 0.8);
+    --hover-bg: rgba(255, 255, 255, 0.055);
   }
 }
 
@@ -60,6 +156,15 @@
   .dark body {
     color: #e5e7eb;
     background: #0b0b0b;
+  }
+
+  ::selection {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   hr {

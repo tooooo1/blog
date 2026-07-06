@@ -1,6 +1,7 @@
 import { getPostsByCategory, getCategories } from "@/utils/getPosts";
 import { CATEGORY_LABELS, getCategoryLabel } from "@/types/blog";
 import { PostCard } from "@/components/PostCard";
+import { PageHeader } from "@/components/PageHeader";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -41,18 +42,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div className="w-full max-w-2xl px-4">
-      <nav className="mb-8 text-sm text-[color:var(--muted)]">
-        <Link href="/blog" className="hover:text-[color:var(--fg)]">
-          blog
+      <nav className="mb-6 text-sm text-[color:var(--muted)]">
+        <Link
+          href="/blog"
+          transitionTypes={["nav-back"]}
+          className="hover:text-[color:var(--fg)] transition-colors"
+        >
+          블로그
         </Link>
         <span className="mx-2">/</span>
         <span className="text-[color:var(--fg)]">{label.name}</span>
       </nav>
 
-      <header className="mb-12">
-        <h1 className="text-3xl font-bold mb-2">{label.name}</h1>
-        <p className="text-[color:var(--muted)]">{label.description}</p>
-      </header>
+      <PageHeader title={label.name} description={label.description} />
 
       <section>
         {posts.length > 0 ? (

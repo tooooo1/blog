@@ -1,28 +1,26 @@
-import Link from "next/link";
 import { Post } from "@/types/blog";
 import { formatDate, calculateReadingTime } from "@/utils/getPosts";
+import { EntryCard } from "./EntryCard";
 
 interface PostCardProps {
   post: Post;
 }
 
 export function PostCard({ post }: PostCardProps) {
-  const readingTime = calculateReadingTime(post.content);
-
   return (
-    <Link
+    <EntryCard
       href={`/blog/${post.slug}`}
-      className="group block py-6"
-    >
-      <article>
-        <h2 className="text-xl font-medium mb-2">{post.title}</h2>
-        <p className="text-[color:var(--muted)] text-sm mb-3">
-          {post.description}
-        </p>
-        <div className="flex items-center gap-3 text-xs text-[color:var(--muted)]">
-          {post.publishedAt && <time>{formatDate(post.publishedAt)}</time>}
+      title={post.title}
+      description={post.description}
+      meta={
+        <>
+          {post.publishedAt && (
+            <time dateTime={post.publishedAt}>
+              {formatDate(post.publishedAt)}
+            </time>
+          )}
           <span>·</span>
-          <span>{readingTime}분</span>
+          <span>{calculateReadingTime(post.content)}분</span>
           {post.tags.length > 0 && (
             <>
               <span>·</span>
@@ -33,8 +31,8 @@ export function PostCard({ post }: PostCardProps) {
               </div>
             </>
           )}
-        </div>
-      </article>
-    </Link>
+        </>
+      }
+    />
   );
 }

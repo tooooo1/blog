@@ -1,6 +1,7 @@
 import { getAllPosts, getCategories, getPostsByCategory } from "@/utils/getPosts";
 import { PostCard } from "@/components/PostCard";
 import { CategoryBadge } from "@/components/CategoryBadge";
+import { PageHeader } from "@/components/PageHeader";
 import { getCategoryLabel } from "@/types/blog";
 
 export const metadata = {
@@ -14,11 +15,10 @@ export default function BlogPage() {
 
   return (
     <div className="w-full max-w-2xl px-4">
+      <PageHeader title="블로그" description="배우고 만들며 남기는 기술 기록" />
+
       {categories.length > 0 && (
-        <section className="mb-6">
-          <h2 className="text-sm font-medium mb-4 text-[color:var(--muted)]">
-            Categories
-          </h2>
+        <section className="mb-8">
           <div className="flex flex-wrap gap-2">
             {categories.map((categoryId) => {
               const label = getCategoryLabel(categoryId);

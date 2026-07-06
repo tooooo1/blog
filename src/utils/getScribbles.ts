@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { formatDate } from "./getPosts";
 
 export interface Scribble {
   date: string;
@@ -43,13 +44,4 @@ export const getScribbles = () => {
   });
 
   return scribbles.sort((a, b) => (a.date > b.date ? -1 : 1));
-};
-
-const formatDate = (dateString: string) => {
-  try {
-    const [year, month, day] = dateString.split("-");
-    return `${year}년 ${month}월 ${day}일`;
-  } catch (e) {
-    return dateString;
-  }
 };

@@ -99,30 +99,31 @@ export default async function PostPage({ params }: PostPageProps) {
       />
       <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
         <article>
-        <header className="mb-16 pt-8">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-[color:var(--fg)] leading-tight">
+        <header className="mb-12 pt-4">
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-[color:var(--fg)] leading-tight">
             {post.title}
           </h1>
 
-          <div className="flex flex-wrap items-center gap-2 text-sm text-[color:var(--muted)] mb-12">
+          <div className="flex flex-wrap items-center gap-2 text-sm text-[color:var(--muted)]">
             {post.publishedAt && (
-              <time>{formatDate(post.publishedAt)}</time>
+              <time dateTime={post.publishedAt}>
+                {formatDate(post.publishedAt)}
+              </time>
             )}
             <span>·</span>
             <span>{readingTime}분</span>
             {post.tags.length > 0 && (
               <>
+                <span>·</span>
                 {post.tags.map((tag) => (
-                  <span key={tag} className="text-[color:var(--muted)]">
-                    #{tag}
-                  </span>
+                  <span key={tag}>#{tag}</span>
                 ))}
               </>
             )}
           </div>
         </header>
 
-        <div className="prose prose-gray dark:prose-invert max-w-none pb-24">
+        <div className="pb-20">
           <MDXRemote
             source={post.content}
             components={{
@@ -145,9 +146,15 @@ export default async function PostPage({ params }: PostPageProps) {
         <footer className="py-12 border-t border-[color:var(--border)]">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)] transition-colors"
+            transitionTypes={["nav-back"]}
+            className="group inline-flex items-center gap-2 text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)] transition-colors"
           >
-            <span>←</span>
+            <span
+              aria-hidden="true"
+              className="inline-block transition-transform duration-200 group-hover:-translate-x-0.5"
+            >
+              ←
+            </span>
             <span>목록으로</span>
           </Link>
         </footer>

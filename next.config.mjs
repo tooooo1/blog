@@ -3,8 +3,8 @@ const nextConfig = {
   turbopack: {
     root: import.meta.dirname,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
+  experimental: {
+    viewTransition: true,
   },
 };
 

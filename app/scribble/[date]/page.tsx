@@ -51,51 +51,64 @@ export default async function ScribblePage({ params }: ScribblePageProps) {
   }
 
   return (
-    <article className="w-full max-w-2xl px-4 pb-10">
-      <header>
-        <div className="flex justify-between items-center mb-2">
-          <h1 className="text-2xl font-medium">{scribble.title}</h1>
-          <Link
-            href="/scribble"
-            className="text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)]"
-          >
-            ← 낙서장으로 돌아가기
-          </Link>
+    <article className="w-full max-w-2xl px-4">
+      <header className="mb-12 pt-4">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-[color:var(--fg)] leading-tight">
+          {scribble.title}
+        </h1>
+        <div className="flex flex-wrap items-center gap-2 text-sm text-[color:var(--muted)]">
+          <time dateTime={scribble.date}>{scribble.formattedDate}</time>
+          {scribble.description && (
+            <>
+              <span>·</span>
+              <span>{scribble.description}</span>
+            </>
+          )}
         </div>
-        <time
-          dateTime={scribble.date}
-          className="text-[color:var(--muted)] text-sm block mb-4"
-        >
-          {scribble.formattedDate}
-        </time>
-        {scribble.description ? (
-          <p className="text-[color:var(--muted)] italic mb-4">
-            {scribble.description}
-          </p>
-        ) : null}
         {scribble.image ? (
-          <figure className="mb-6">
+          <figure className="mt-8">
+            {/* Frontmatter images have unknown dimensions, so next/image cannot be used. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={scribble.image}
               alt={scribble.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-auto rounded-lg"
             />
           </figure>
         ) : null}
       </header>
-      <MDXRemote
-        components={components}
-        source={scribble.content}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [
-              [rehypePrettyCode, prettyCodeOptions],
-              rehypeSlug,
-            ],
-          },
-        }}
-      />
+      <div className="pb-20">
+        <MDXRemote
+          components={components}
+          source={scribble.content}
+          options={{
+            mdxOptions: {
+              remarkPlugins: [remarkGfm],
+              rehypePlugins: [
+                [rehypePrettyCode, prettyCodeOptions],
+                rehypeSlug,
+              ],
+            },
+          }}
+        />
+      </div>
+      <footer className="py-12 border-t border-[color:var(--border)]">
+        <Link
+          href="/scribble"
+          transitionTypes={["nav-back"]}
+          className="group inline-flex items-center gap-2 text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)] transition-colors"
+        >
+          <span
+            aria-hidden="true"
+            className="inline-block transition-transform duration-200 group-hover:-translate-x-0.5"
+          >
+            ←
+          </span>
+          <span>목록으로</span>
+        </Link>
+      </footer>
     </article>
   );
 }

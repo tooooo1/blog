@@ -20,11 +20,11 @@ describe("getScribbles", () => {
     }
   });
 
-  it("formattedDate follows 'YYYY년 MM월 DD일' pattern derived from filename date", () => {
+  it("formattedDate follows 'YYYY년 M월 D일' pattern derived from filename date", () => {
     const scribbles = getScribbles();
     for (const scribble of scribbles) {
-      // The impl formats as `${year}년 ${month}월 ${day}일` from the YYYY-MM-DD filename
-      expect(scribble.formattedDate).toMatch(/^\d{4}년 \d{2}월 \d{2}일$/);
+      // Shares formatDate with blog posts (ko-KR locale, no zero padding)
+      expect(scribble.formattedDate).toMatch(/^\d{4}년 \d{1,2}월 \d{1,2}일$/);
     }
   });
 
@@ -47,7 +47,7 @@ describe("getScribbles", () => {
     const scribbles = getScribbles();
     const scribble = scribbles.find((s) => s.date === "2025-03-07");
     expect(scribble).toBeDefined();
-    expect(scribble!.formattedDate).toBe("2025년 03월 07일");
+    expect(scribble!.formattedDate).toBe("2025년 3월 7일");
     expect(typeof scribble!.content).toBe("string");
     expect(scribble!.content.length).toBeGreaterThan(0);
   });
