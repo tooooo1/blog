@@ -123,6 +123,7 @@
     color: #1f2937;
     background: #ffffff;
     font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    word-break: keep-all;
   }
 }
 
@@ -220,5 +221,116 @@
   .dark code[data-theme] span {
     color: var(--shiki-dark);
     background-color: var(--shiki-dark-bg);
+  }
+}
+
+/* 테마 스위치 — 모노크롬 해/달 글리프, 토큰만 사용 */
+.theme-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 46px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--hover-bg);
+  cursor: pointer;
+  transition: border-color 200ms ease, background-color 200ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.theme-switch:hover {
+  border-color: var(--muted);
+}
+.theme-switch:focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 2px;
+}
+
+/* 밤에만 보이는 점 두 개 */
+.theme-switch__star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 9999px;
+  background: var(--muted);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.theme-switch__star:nth-of-type(1) {
+  top: 8px;
+  left: 11px;
+}
+.theme-switch__star:nth-of-type(2) {
+  top: 15px;
+  left: 17px;
+}
+.dark .theme-switch__star {
+  opacity: 1;
+}
+
+.theme-switch__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  color: var(--fg);
+  transition: transform 200ms ease;
+}
+.dark .theme-switch__knob {
+  transform: translateX(20px);
+}
+
+/* 해 — 가운데 원 + 사방 점 4개 (box-shadow) */
+.theme-switch__sun {
+  position: absolute;
+  inset: 0;
+  opacity: 1;
+  transform: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.theme-switch__sun::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 9999px;
+  background: currentColor;
+  box-shadow:
+    0 -7px 0 -2.5px,
+    0 7px 0 -2.5px,
+    -7px 0 0 -2.5px,
+    7px 0 0 -2.5px;
+}
+.dark .theme-switch__sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+/* 달 — inset 그림자로 만든 초승달 */
+.theme-switch__moon {
+  position: absolute;
+  inset: 2px;
+  border-radius: 9999px;
+  box-shadow: inset -4px -3px 0 0 currentColor;
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+.dark .theme-switch__moon {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch,
+  .theme-switch__star,
+  .theme-switch__knob,
+  .theme-switch__sun,
+  .theme-switch__moon {
+    transition-duration: 1ms;
   }
 }

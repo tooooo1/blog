@@ -1,22 +1,64 @@
-import { getAllPosts, getPostBySlug, formatDate, calculateReadingTime } from "@/utils/getPosts";
+import {
+  getAllPosts,
+  getPostBySlug,
+  formatDate,
+  calculateReadingTime,
+} from "@/utils/getPosts";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  H1, H2, H3, H4, P, Blockquote, InlineCode, Ul, Ol, Li, Img, Anchor, Hr,
-  Callout, AhaPoint, InfoBox, Warning, Tip, SourceLink, Timeline, TimelineItem,
+  H1,
+  H2,
+  H3,
+  H4,
+  P,
+  Blockquote,
+  InlineCode,
+  Ul,
+  Ol,
+  Li,
+  Img,
+  Anchor,
+  Hr,
+  Callout,
+  AhaPoint,
+  InfoBox,
+  Warning,
+  Tip,
+  SourceLink,
+  Timeline,
+  TimelineItem,
 } from "@/components/ui";
 import mdxComponents from "@/components/ui/mdx-components";
 import { BlogPostStructuredData } from "@/components/StructuredData";
+import { Toc } from "@/components/Toc";
+import { ShareButton } from "@/components/ShareButton";
 import { SITE_CONFIG } from "@/constants/site";
+import { prettyCodeOptions } from "@/constants/mdx";
+import { Post } from "@/types/blog";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
-const prettyCodeOptions = {
-  theme: { light: "github-light", dark: "github-dark" },
-  keepBackground: false,
-};
+function getNextPost(current: Post, posts: Post[]): Post | undefined {
+  return posts
+    .filter((post) => post.slug !== current.slug)
+    .sort((a, b) => {
+      const overlapA = a.tags.filter((tag) =>
+        current.tags.includes(tag)
+      ).length;
+      const overlapB = b.tags.filter((tag) =>
+        current.tags.includes(tag)
+      ).length;
+      if (overlapB !== overlapA) {
+        return overlapB - overlapA;
+      }
+      const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+      const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+      return dateB - dateA;
+    })[0];
+}
 
 interface PostPageProps {
   params: Promise<{
@@ -86,6 +128,8 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   const readingTime = calculateReadingTime(post.content);
+  const nextPost = getNextPost(post, getAllPosts());
+  const postUrl = `${SITE_CONFIG.url}/blog/${post.slug}`;
 
   return (
     <>
@@ -97,67 +141,109 @@ export default async function PostPage({ params }: PostPageProps) {
         slug={post.slug}
         tags={post.tags}
       />
-      <div className="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <aside className="hidden xl:block absolute left-full top-0 bottom-0 ml-10 w-56">
+          <Toc />
+        </aside>
         <article>
-        <header className="mb-12 pt-4">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-[color:var(--fg)] leading-tight">
-            {post.title}
-          </h1>
+          <header className="mb-12 pt-4">
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4 text-[color:var(--fg)] leading-tight">
+              {post.title}
+            </h1>
 
-          <div className="flex flex-wrap items-center gap-2 text-sm text-[color:var(--muted)]">
-            {post.publishedAt && (
-              <time dateTime={post.publishedAt}>
-                {formatDate(post.publishedAt)}
-              </time>
-            )}
-            <span>·</span>
-            <span>{readingTime}분</span>
-            {post.tags.length > 0 && (
-              <>
-                <span>·</span>
-                {post.tags.map((tag) => (
-                  <span key={tag}>#{tag}</span>
-                ))}
-              </>
-            )}
+            <div className="flex flex-wrap items-center gap-2 text-sm text-[color:var(--muted)]">
+              {post.publishedAt && (
+                <time dateTime={post.publishedAt}>
+                  {formatDate(post.publishedAt)}
+                </time>
+              )}
+              <span>·</span>
+              <span>{readingTime}분</span>
+              {post.tags.length > 0 && (
+                <>
+                  <span>·</span>
+                  {post.tags.map((tag) => (
+                    <span key={tag}>#{tag}</span>
+                  ))}
+                </>
+              )}
+              <ShareButton title={post.title} url={postUrl} />
+            </div>
+          </header>
+
+          <div className="pb-20">
+            <MDXRemote
+              source={post.content}
+              components={{
+                ...mdxComponents,
+                H1,
+                H2,
+                H3,
+                H4,
+                P,
+                Blockquote,
+                InlineCode,
+                Ul,
+                Ol,
+                Li,
+                Img,
+                Anchor,
+                Hr,
+                Callout,
+                AhaPoint,
+                InfoBox,
+                Warning,
+                Tip,
+                SourceLink,
+                Timeline,
+                TimelineItem,
+              }}
+              options={{
+                mdxOptions: {
+                  remarkPlugins: [remarkGfm],
+                  rehypePlugins: [
+                    [rehypePrettyCode, prettyCodeOptions],
+                    rehypeSlug,
+                  ],
+                },
+              }}
+            />
           </div>
-        </header>
 
-        <div className="pb-20">
-          <MDXRemote
-            source={post.content}
-            components={{
-              ...mdxComponents,
-              H1, H2, H3, H4, P, Blockquote, InlineCode, Ul, Ol, Li, Img, Anchor, Hr,
-              Callout, AhaPoint, InfoBox, Warning, Tip, SourceLink, Timeline, TimelineItem,
-            }}
-            options={{
-              mdxOptions: {
-                remarkPlugins: [remarkGfm],
-                rehypePlugins: [
-                  [rehypePrettyCode, prettyCodeOptions],
-                  rehypeSlug,
-                ],
-              },
-            }}
-          />
-        </div>
-
-        <footer className="py-12 border-t border-[color:var(--border)]">
-          <Link
-            href="/blog"
-            transitionTypes={["nav-back"]}
-            className="group inline-flex items-center gap-2 text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)] transition-colors"
-          >
-            <span
-              aria-hidden="true"
-              className="inline-block transition-transform duration-200 group-hover:-translate-x-0.5"
+          <footer className="py-12 border-t border-[color:var(--border)]">
+            {nextPost && (
+              <Link
+                href={`/blog/${nextPost.slug}`}
+                transitionTypes={["nav-forward"]}
+                className="group block -mx-3 mb-6 px-3 py-4 rounded-lg transition-colors duration-200 hover:bg-[color:var(--hover-bg)]"
+              >
+                <p className="text-xs text-[color:var(--muted)] mb-1">
+                  다음 읽을 글
+                </p>
+                <p className="font-semibold text-[color:var(--fg)]">
+                  {nextPost.title}
+                </p>
+                {nextPost.description && (
+                  <p className="text-sm text-[color:var(--muted)] line-clamp-1">
+                    {nextPost.description}
+                  </p>
+                )}
+              </Link>
+            )}
+            <Link
+              href="/blog"
+              transitionTypes={["nav-back"]}
+              className="group inline-flex items-center gap-2 text-sm text-[color:var(--muted)] hover:text-[color:var(--fg)] transition-colors"
             >
-              ←
-            </span>
-            <span>목록으로</span>
-          </Link>
-        </footer>
+              <span
+                aria-hidden="true"
+                className="inline-block transition-transform duration-200 group-hover:-translate-x-0.5"
+              >
+                ←
+              </span>
+              <span>목록으로</span>
+            </Link>
+          </footer>
         </article>
       </div>
     </>

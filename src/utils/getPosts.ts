@@ -66,3 +66,8 @@ export function calculateReadingTime(content: string): number {
   const wordCount = content.trim().split(/\s+/).length;
   return Math.ceil(wordCount / wordsPerMinute);
 }
+
+export function isRecentlyPublished(dateString: string, days = 10): boolean {
+  const publishedMs = new Date(dateString).getTime();
+  return Date.now() - publishedMs < days * 24 * 60 * 60 * 1000;
+}

@@ -1,5 +1,9 @@
 import { Post } from "@/types/blog";
-import { formatDate, calculateReadingTime } from "@/utils/getPosts";
+import {
+  formatDate,
+  calculateReadingTime,
+  isRecentlyPublished,
+} from "@/utils/getPosts";
 import { EntryCard } from "./EntryCard";
 
 interface PostCardProps {
@@ -7,10 +11,21 @@ interface PostCardProps {
 }
 
 export function PostCard({ post }: PostCardProps) {
+  const isNew = !!post.publishedAt && isRecentlyPublished(post.publishedAt);
+
   return (
     <EntryCard
       href={`/blog/${post.slug}`}
-      title={post.title}
+      title={
+        <>
+          {post.title}
+          {isNew && (
+            <span className="ml-2 text-[10px] font-medium tracking-wide text-[color:var(--fg)] border border-[color:var(--border)] rounded-full px-1.5 py-px align-middle">
+              NEW
+            </span>
+          )}
+        </>
+      }
       description={post.description}
       meta={
         <>

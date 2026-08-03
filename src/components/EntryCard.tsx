@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 interface EntryCardProps {
   href: string;
-  title: string;
+  title: ReactNode;
   description?: string;
   meta?: ReactNode;
 }
