@@ -1,0 +1,40 @@
+/*
+  이 글 전용 주제색. globals.css로 올리지 않는다 — 이 폴더를 지우면 색도 같이 사라져야 한다.
+  한 글만 쓰는 색은 전역 토큰이 아니다. 두 번째 글이 같은 색을 요구하면 그때 승격한다.
+
+  팔레트는 Open Color 계열: 파랑 = 정보 없는 기본 면, 빨강 = "다름", 초록 = "일치".
+  규칙: 주제색은 material <figure> 안에서만 존재한다. 본문·크롬 금지.
+  기본 면(--m-cell·--m-chip·--m-stamp)은 정보를 싣지 않는다 — 정보는 모양과 글자 라벨이 싣고,
+  빨강·초록은 그 라벨의 중복 채널이다.
+
+  검사 (비어야 통과):
+    find app src -type f \( -name '*.tsx' -o -name '*.ts' -o -name '*.css' \) -print0 \
+      | xargs -0 grep -l -- '--m-' | grep -v '^src/materials/'
+*/
+
+.m-parcel {
+  /* 정보 없는 기본 면 */
+  --m-cell: #d0ebff;
+  --m-chip: #e7f5ff;
+  --m-stamp: rgba(34, 139, 230, 0.08);
+  /* 스트로크·테두리 전용 파랑 */
+  --m-blue: #228be6;
+  /* "다름" 그래픽 강조 — surface 위 3.49로 그래픽 3:1 통과, 글자로는 쓰지 않는다 */
+  --m-accent: #f03e3e;
+  --m-diff-soft: #ffe3e3;
+  /* "다름" 글자용 — 가장 밝은 면(surface-2) 위 5.41 */
+  --m-accent-text: #b02525;
+  /* "일치" 글자용 — surface-2 위 5.76 */
+  --m-ok-text: #166534;
+}
+
+.dark .m-parcel {
+  --m-cell: #1b3a5c;
+  --m-chip: #14304a;
+  --m-stamp: rgba(77, 171, 247, 0.12);
+  --m-blue: #4dabf7;
+  --m-accent: #fa5252;
+  --m-diff-soft: #4a1f1f;
+  --m-accent-text: #ff8787;
+  --m-ok-text: #4ade80;
+}

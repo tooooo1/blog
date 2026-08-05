@@ -31,6 +31,7 @@ import {
   TimelineItem,
 } from "@/components/ui";
 import mdxComponents from "@/components/ui/mdx-components";
+import { getMaterials } from "@/materials";
 import { BlogPostStructuredData } from "@/components/StructuredData";
 import { Toc } from "@/components/Toc";
 import { ShareButton } from "@/components/ShareButton";
@@ -130,6 +131,8 @@ export default async function PostPage({ params }: PostPageProps) {
   const readingTime = calculateReadingTime(post.content);
   const nextPost = getNextPost(post, getAllPosts());
   const postUrl = `${SITE_CONFIG.url}/blog/${post.slug}`;
+  // 글 전용 시각자료: src/materials/<slug>/index.ts가 있으면 그 글에서만 쓸 수 있게 주입한다
+  const materials = await getMaterials(post.slug);
 
   return (
     <>
@@ -197,6 +200,7 @@ export default async function PostPage({ params }: PostPageProps) {
                 SourceLink,
                 Timeline,
                 TimelineItem,
+                ...materials,
               }}
               options={{
                 mdxOptions: {
