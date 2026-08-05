@@ -17,3 +17,6 @@ next-env.d.ts
 
 # Local scratch workspace
 _workspace/
+
+# Serena (Codex MCP) local state
+.serena/
