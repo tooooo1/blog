@@ -155,6 +155,8 @@ export default async function PostPage({ params }: PostPageProps) {
               {post.title}
             </h1>
 
+            {/* 메타는 한 행에 고정한다 — 태그를 같은 행에 두면 태그 수만큼 줄바꿈이
+                생기고 ShareButton의 ml-auto가 둘째 줄 오른쪽으로 밀려난다 */}
             <div className="flex flex-wrap items-center gap-2 text-sm text-[color:var(--muted)]">
               {post.publishedAt && (
                 <time dateTime={post.publishedAt}>
@@ -163,16 +165,16 @@ export default async function PostPage({ params }: PostPageProps) {
               )}
               <span>·</span>
               <span>{readingTime}분</span>
-              {post.tags.length > 0 && (
-                <>
-                  <span>·</span>
-                  {post.tags.map((tag) => (
-                    <span key={tag}>#{tag}</span>
-                  ))}
-                </>
-              )}
               <ShareButton title={post.title} url={postUrl} />
             </div>
+
+            {post.tags.length > 0 && (
+              <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm text-[color:var(--muted)]">
+                {post.tags.map((tag) => (
+                  <span key={tag}>#{tag}</span>
+                ))}
+              </div>
+            )}
           </header>
 
           <div className="pb-20">
