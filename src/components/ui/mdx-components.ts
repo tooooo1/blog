@@ -9,6 +9,7 @@ import { Ul, Ol, Li } from "./list";
 import { InlineCode } from "./code";
 import { Hr } from "./hr";
 import { Img } from "./img";
+import { Table, Thead, Tbody, Tr, Th, Td } from "./table";
 
 const mdxComponents = {
   blockquote: Blockquote,
@@ -24,6 +25,12 @@ const mdxComponents = {
   code: InlineCode,
   hr: Hr,
   img: Img,
+  table: Table,
+  thead: Thead,
+  tbody: Tbody,
+  tr: Tr,
+  th: Th,
+  td: Td,
 };
 
 export default mdxComponents;

@@ -39,7 +39,8 @@ export async function GET(request: Request) {
               <div
                 style={{
                   fontSize: 28,
-                  color: "#6b7280",
+                  // 사이트 --muted와 같은 값으로 유지한다 (edge 런타임이라 CSS 변수를 못 읽는다)
+                  color: "#5f6873",
                   lineHeight: 1.4,
                   maxWidth: "80%",
                 }}
