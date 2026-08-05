@@ -2,8 +2,7 @@ import { SITE_CONFIG } from "@/constants/site";
 import { ProfileStructuredData } from "@/components/StructuredData";
 
 const OG_TITLE = "여러 앱 환경 위에서 웹뷰를 만듭니다.";
-const DESCRIPTION =
-  "프론트엔드 개발자 정충일. 코드는 적게 · 측정은 먼저 · 실수는 구조로.";
+const DESCRIPTION = "프론트엔드 개발자 정충일입니다.";
 
 const ogImage = `${SITE_CONFIG.url}/api/og?title=${encodeURIComponent(OG_TITLE)}`;
 
