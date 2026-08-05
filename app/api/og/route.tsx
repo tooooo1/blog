@@ -18,9 +18,21 @@ const FG = "#e5e7eb";
 const MUTED = "#9ca3af";
 const RULE = "#374151";
 
-/** 실측 기준: 66px는 44자까지 3줄에 들어가고, 그 위는 4줄이 되어 구분선에 닿는다.
-    짧은 제목만 캔버스를 채우도록 키운다 */
-const titleSize = (title: string) => (title.length <= 14 ? 84 : title.length <= 44 ? 66 : 56);
+const AVAIL = 1200 - 84 * 2;
+const LADDER = [84, 76, 68, 62, 56, 52];
+
+/** 제목 폭 = 이 값 × 폰트크기. 계수는 실제 렌더로 캘리브레이션했다 —
+    "같은 빌드에서 sha256이 두 개 나왔다"는 16.36이고 66px에서 1080px로 1032px를 넘겨
+    "나왔다"가 다음 줄로 내려갔다. 62px에서 1014px로 한 줄에 들어간다 */
+const estUnits = (title: string) =>
+  [...title].reduce((w, c) => w + (c === " " ? 0.26 : c.charCodeAt(0) < 128 ? 0.55 : 0.98), 0);
+
+/** 한 줄에 들어가는 가장 큰 크기를 고른다. 52px에서도 한 줄이 안 되면 3줄까지 허용하는
+    가장 큰 크기로 떨어진다 — 제목 길이 규칙을 사람이 지킬 필요가 없게 만드는 쪽이다 */
+function titleSize(title: string) {
+  const units = estUnits(title);
+  return LADDER.find((size) => units * size <= AVAIL) ?? LADDER.find((size) => units * size <= AVAIL * 3) ?? 52;
+}
 
 /** Noto Sans KR Bold를 필요한 글자만 서브셋으로 받는다(약 5KB).
     UA를 비워야 woff2 대신 satori가 읽는 TrueType이 온다 */
@@ -56,6 +68,15 @@ export async function GET(request: Request) {
   const size = titleSize(title);
   const data = await loadBold(title + meta);
 
+  try {
+    return render(title, meta, size, data);
+  } catch {
+    // 깨진 이미지는 크롤러 캐시에 영구히 박힌다 — 500 대신 사이트명만 있는 판을 내보낸다
+    return render(SITE_CONFIG.name, "", 84, null);
+  }
+}
+
+function render(title: string, meta: string, size: number, data: ArrayBuffer | null) {
   return new ImageResponse(
     (
       <div
@@ -94,8 +115,12 @@ export async function GET(request: Request) {
             </div>
           ))}
         </div>
-        <div style={{ display: "flex", width: "100%", height: 1, backgroundColor: RULE, marginBottom: 28 }} />
-        <div style={{ display: "flex", fontSize: 30, letterSpacing: "-0.01em", color: MUTED }}>{meta}</div>
+        {meta && (
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", width: "100%", height: 1, backgroundColor: RULE, marginBottom: 28 }} />
+            <div style={{ display: "flex", fontSize: 30, letterSpacing: "-0.01em", color: MUTED }}>{meta}</div>
+          </div>
+        )}
       </div>
     ),
     {
