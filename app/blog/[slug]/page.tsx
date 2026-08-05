@@ -79,9 +79,10 @@ export async function generateMetadata({ params }: PostPageProps) {
   const post = getPostBySlug(slug);
   if (!post) return {};
 
-  const ogImage = `${SITE_CONFIG.url}/api/og?title=${encodeURIComponent(
-    post.title
-  )}&description=${encodeURIComponent(post.description)}`;
+  // 설명은 넘기지 않는다 — 미리보기가 og:description을 이미지 밖에 텍스트로 또 그린다
+  const ogImage = `${SITE_CONFIG.url}/api/og?title=${encodeURIComponent(post.title)}&category=${
+    post.category
+  }&date=${post.publishedAt ?? ""}`;
 
   return {
     title: post.title,

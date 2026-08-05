@@ -3,9 +3,7 @@ import { SITE_CONFIG } from "@/constants/site";
 const OG_TITLE = "만든 것을 측정하고, 측정한 것을 자동화합니다.";
 const DESCRIPTION = "웰로의 프론트엔드를 만드는 정충일입니다.";
 
-const ogImage = `${SITE_CONFIG.url}/api/og?title=${encodeURIComponent(
-  OG_TITLE
-)}&description=${encodeURIComponent(DESCRIPTION)}`;
+const ogImage = `${SITE_CONFIG.url}/api/og?title=${encodeURIComponent(OG_TITLE)}`;
 
 export const metadata = {
   title: "소개",
