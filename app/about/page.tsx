@@ -1,7 +1,9 @@
 import { SITE_CONFIG } from "@/constants/site";
+import { ProfileStructuredData } from "@/components/StructuredData";
 
-const OG_TITLE = "만든 것을 측정하고, 측정한 것을 자동화합니다.";
-const DESCRIPTION = "웰로의 프론트엔드를 만드는 정충일입니다.";
+const OG_TITLE = "여러 앱 환경 위에서 웹뷰를 만듭니다.";
+const DESCRIPTION =
+  "프론트엔드 개발자 정충일. 코드는 적게 · 측정은 먼저 · 실수는 구조로.";
 
 const ogImage = `${SITE_CONFIG.url}/api/og?title=${encodeURIComponent(OG_TITLE)}`;
 
@@ -39,13 +41,12 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <article className="w-full max-w-2xl px-4">
+      <ProfileStructuredData />
       <header className="pt-4">
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight">
           정충일
         </h1>
-        <p className="mt-3 text-lg text-[color:var(--muted)]">
-          만든 것을 측정하고, 측정한 것을 자동화합니다.
-        </p>
+        <p className="mt-3 text-lg text-[color:var(--muted)]">{OG_TITLE}</p>
       </header>
 
       <div className="mt-6 leading-relaxed">
@@ -53,7 +54,9 @@ export default function AboutPage() {
           웰로의 프론트엔드를 혼자 맡고 있습니다. 전에는 카카오브레인에서
           인턴으로 일했습니다.
         </p>
-        <p>좋은 코드를 좋아하고, 그 코드가 숫자를 바꾸는 순간을 더 좋아합니다.</p>
+        <p>
+          좋은 코드를 좋아하고, 그 코드가 숫자를 바꾸는 순간을 더 좋아합니다.
+        </p>
         <p>요즘은 코드를 스스로 고치는 파이프라인을 설계합니다.</p>
       </div>
 
