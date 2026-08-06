@@ -216,8 +216,8 @@ export function DigestMatchDemo({ caption }: Props) {
             role="img"
             aria-label={
               pushed
-                ? `--push 전환 후: 빌드와 레지스트리의 digest가 ${shortDigest(MANIFEST_DIGEST.push)} 하나로 일치한다`
-                : `--load 상태: 빌드가 만든 ${shortDigest(MANIFEST_DIGEST.push)}와 레지스트리에 올라간 ${shortDigest(MANIFEST_DIGEST.load)}가 서로 다르다`
+                ? `--push 전환 후: 빌드와 레지스트리의 digest가 ${shortDigest(MANIFEST_DIGEST.push)} 하나로 일치합니다`
+                : `--load 상태: 빌드가 만든 ${shortDigest(MANIFEST_DIGEST.push)}와 레지스트리에 올라간 ${shortDigest(MANIFEST_DIGEST.load)}가 서로 다릅니다`
             }
             className="block mx-auto"
           />
@@ -239,8 +239,8 @@ export function DigestMatchDemo({ caption }: Props) {
             )}{" "}
             <span className="text-[color:var(--muted)]">
               {pushed
-                ? "재포장이 사라졌으니 지문이 갈릴 자리도 사라졌다. 증명서 동봉을 끈 우리 설정에서는, 처음의 미스터리가 이렇게 닫힌다."
-                : "글을 연 그 두 줄이다."}
+                ? "데몬이 다시 압축하는 일이 없어졌으니 digest가 갈릴 자리도 없어요. 증명서를 끈 우리 설정에서는 처음 로그의 sha256 두 개가 이렇게 하나로 닫힙니다."
+                : "글을 연 그 두 줄이에요."}
             </span>
           </p>
         </div>

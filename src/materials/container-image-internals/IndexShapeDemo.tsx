@@ -15,12 +15,12 @@ const OPTIONS = [
   {
     value: true,
     label: "기본값",
-    hint: "--push는 증명서를 동봉한다 (buildx 0.11+)",
+    hint: "--push는 증명서를 붙입니다 (buildx 0.11+)",
   },
   {
     value: false,
     label: "--provenance=false",
-    hint: "동봉을 끄고 기존 모양으로 고정",
+    hint: "증명서를 끄고 기존 모양으로 고정",
   },
 ] as const;
 
@@ -39,7 +39,7 @@ export function IndexShapeDemo({ caption }: Props) {
       <div className="rounded-2xl border border-[color:var(--border-strong)] bg-[color:var(--surface)] overflow-hidden">
         <fieldset className="border-0 m-0 p-5 pb-4 border-b border-[color:var(--border-strong)]">
           <legend className="float-left w-full text-[13px] text-[color:var(--muted)] mb-3 px-0">
-            증명서를 동봉하는가
+            증명서를 붙이는가
           </legend>
           <div className="clear-both flex flex-wrap gap-2">
             {OPTIONS.map((o) => (
@@ -71,7 +71,7 @@ export function IndexShapeDemo({ caption }: Props) {
           <Node
             label="tag"
             value={TAG}
-            note="여기는 안 변한다"
+            note="태그 자체는 안 변해요"
             pill
           />
           <Arrow />
@@ -81,7 +81,7 @@ export function IndexShapeDemo({ caption }: Props) {
                 label="index"
                 value={target.digest}
                 size={target.size}
-                note="태그가 이제 이걸 가리킨다"
+                note="태그가 이제 여기를 가리켜요"
                 digest
                 changed
               />
@@ -98,7 +98,7 @@ export function IndexShapeDemo({ caption }: Props) {
                 label="증명서"
                 value={ATTESTATION_MANIFEST.digest}
                 size={ATTESTATION_MANIFEST.size}
-                note="unknown/unknown으로 위장"
+                note="unknown/unknown이라는 가짜 플랫폼"
                 digest
                 changed
                 indent
@@ -109,7 +109,7 @@ export function IndexShapeDemo({ caption }: Props) {
               label="manifest"
               value={IMAGE_MANIFEST.digest}
               size={IMAGE_MANIFEST.size}
-              note="태그가 곧바로 가리킨다"
+              note="태그가 곧바로 가리켜요"
               digest
             />
           )}
@@ -136,7 +136,7 @@ export function IndexShapeDemo({ caption }: Props) {
                     }
                   >
                     {/* 색 단독으로 정보를 싣지 않는다 — 기호 + 글자 라벨 */}
-                    {broken ? "≠ 걸린다" : "= 무영향"}
+                    {broken ? "≠ 걸림" : "= 무영향"}
                   </span>
                   <span className="text-[color:var(--fg)]">{c.name}</span>
                   {/* note는 index가 있을 때의 결과를 말한다 — 없는 상태에서 보이면 어긋난다 */}
@@ -149,8 +149,8 @@ export function IndexShapeDemo({ caption }: Props) {
           </ul>
           <p className="text-[13px] text-[color:var(--muted)] m-0 mt-2 leading-6">
             {bundled
-              ? "빌드는 성공하고 배포도 안 깨진다. 바뀐 건 태그가 가리키는 대상의 모양뿐이라, 에러 없이 조용히 통과한다."
-              : "기존 --load 시절과 같은 모양이다. 증명서의 소비자가 없다면 이쪽으로 고정하는 게 맞다."}
+              ? "빌드는 성공하고 배포도 안 깨집니다. 바뀐 건 태그가 가리키는 대상의 모양뿐이라 에러 없이 조용히 통과해요."
+              : "기존 --load 시절과 같은 모양이에요. 증명서를 읽는 쪽이 없다면 이쪽으로 고정하는 게 맞습니다."}
           </p>
         </div>
       </div>

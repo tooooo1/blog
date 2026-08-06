@@ -21,7 +21,7 @@ export function ImageAnatomyDemo({ caption }: Props) {
     <figure className="m-parcel my-8">
       <div className="rounded-2xl border border-[color:var(--border-strong)] bg-[color:var(--surface)] overflow-hidden">
         <div className="px-5 py-4 flex flex-col gap-1.5 overflow-x-auto">
-          <Node label="tag" value={TAG} note="옮겨 붙는 가변 포인터" pill />
+          <Node label="tag" value={TAG} note="사람이 옮겨 붙이는 이름표" pill />
           <Branch />
           <Node
             label="manifest"
@@ -59,8 +59,8 @@ export function ImageAnatomyDemo({ caption }: Props) {
 
         <div className="px-5 py-4 border-t border-[color:var(--border-strong)] bg-[color:var(--surface-2)]">
           <p className="text-[13px] text-[color:var(--muted)] m-0 leading-6">
-            화살표는 전부 digest 참조다. 위에서 아래로 내용이 주소를 결정하고, 태그만
-            그 바깥에서 손으로 옮겨 붙는다.
+            화살표는 전부 digest 참조예요. 위에서 아래로 내용이 digest를 결정하고 태그만
+            그 바깥에서 손으로 옮겨 붙습니다.
           </p>
         </div>
       </div>

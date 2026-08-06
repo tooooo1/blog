@@ -109,7 +109,7 @@ export function GzipByteDiffDemo({ caption }: Props) {
     stream.level === BASELINE_LEVEL
       ? "기준선. BuildKit이 압축한 그 바이트"
       : stream.diffCount === 1
-        ? `다른 바이트 1개 · 오프셋 ${stream.firstDiff}(헤더 안) · 길이는 같다`
+        ? `다른 바이트 1개 · 오프셋 ${stream.firstDiff}(헤더 안) · 길이는 같음`
         : `다른 바이트 ${stream.diffCount.toLocaleString()}개 · 오프셋 ${stream.firstDiff}부터 · 길이 ${stream.bytes.toLocaleString()}B`;
 
   return (
@@ -154,7 +154,7 @@ export function GzipByteDiffDemo({ caption }: Props) {
             className="block"
           />
           <p className="text-[12px] text-[color:var(--muted)] m-0 mt-2 leading-6">
-            셀 = 바이트. 빨간 셀이 기준선과 다른 바이트다.
+            셀 하나가 바이트 하나예요. 빨간 셀이 기준선과 다른 바이트입니다.
           </p>
         </div>
 
@@ -170,10 +170,10 @@ export function GzipByteDiffDemo({ caption }: Props) {
           </p>
           <p className="text-[13px] text-[color:var(--muted)] m-0 mt-1 leading-6">
             {stream.level === 6
-              ? "달라진 건 헤더의 XFL 한 바이트뿐인데 주소는 완전히 갈린다. 이래서 두 레이어의 크기가 621B로 같은데 digest가 다르다."
+              ? "달라진 건 헤더의 XFL 한 바이트뿐인데 digest는 완전히 갈려요. 그래서 두 레이어의 크기가 621B로 같은데 digest가 다릅니다."
               : stream.level === 1
-                ? "설정이 크게 다르면 데이터 자체가 다시 쓰인다. 한 바이트든 천 바이트든, 주소가 갈린다는 결과는 같다."
-                : "이 바이트열의 sha256이 manifest에 적히는 그 digest다."}
+                ? "설정이 크게 다르면 데이터 자체가 다시 쓰입니다. 한 바이트든 천 바이트든 digest가 갈린다는 결과는 같아요."
+                : "이 바이트를 sha256에 넣어 나온 값이 manifest에 적히는 그 digest예요."}
           </p>
         </div>
       </div>

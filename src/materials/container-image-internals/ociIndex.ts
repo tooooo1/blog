@@ -1,7 +1,7 @@
 import { MANIFEST_DIGEST, MANIFEST_SIZE, type Blob } from "./digests";
 
 /*
-  provenance attestation을 동봉하면 태그가 manifest 대신 index를 가리키게 된다.
+  provenance attestation을 붙이면 태그가 manifest 대신 index(목차)를 가리키게 된다.
   아래 digest는 전부 실제로 계산한 값이고 ociIndex.test.ts가 같은 레시피를 재조립해 대조한다.
 
   레시피의 바이트 SSOT는 JSON.stringify의 키 순서, 즉 테스트 안의 객체 리터럴 순서다.
@@ -55,21 +55,21 @@ export const CONSUMERS: Consumer[] = [
   {
     name: "k8s (containerd)",
     handlesIndex: true,
-    note: "index에서 자기 플랫폼을 골라 pull하므로 배포는 안 깨진다",
+    note: "목차에서 자기 플랫폼을 골라 pull하니까 배포는 안 깨져요",
   },
   {
     name: "레지스트리 콘솔",
     handlesIndex: true,
-    note: "unknown/unknown이 목록에 뜬다",
+    note: "unknown/unknown이 목록에 뜹니다",
   },
   {
     name: "docker manifest inspect를 파싱하는 스크립트",
     handlesIndex: false,
-    note: "단일 출력 가정이 깨진다",
+    note: "출력이 하나라는 가정이 깨집니다",
   },
   {
     name: "digest 대조 도구·스캐너",
     handlesIndex: false,
-    note: "가리키는 digest가 바뀐다",
+    note: "가리키는 digest가 바뀝니다",
   },
 ];

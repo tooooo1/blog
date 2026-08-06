@@ -58,8 +58,8 @@ export function ContentAddressDemo({ caption }: Props) {
             className="block text-[13px] text-[color:var(--muted)] mb-3"
           >
             {live
-              ? "한 글자만 바꾸면 아래 지문이 어떻게 변하는지 볼 수 있다"
-              : "이 브라우저 환경에서는 실시간 해싱을 쓸 수 없어 기준쌍만 보인다"}
+              ? "한 글자만 바꾸면 아래 digest가 어떻게 변하는지 볼 수 있어요"
+              : "이 브라우저에서는 실시간 해싱을 쓸 수 없어 기준쌍만 보입니다"}
           </label>
           <input
             id={inputId}
@@ -76,8 +76,8 @@ export function ContentAddressDemo({ caption }: Props) {
         </div>
 
         <div className="px-5 py-4 flex flex-col gap-3">
-          <DigestRow label="기준선의 지문" hex={REFERENCE.baselineHex} />
-          <DigestRow label="지금 입력의 지문" hex={result.hex} changed={changed} />
+          <DigestRow label="기준선의 digest" hex={REFERENCE.baselineHex} />
+          <DigestRow label="지금 입력의 digest" hex={result.hex} changed={changed} />
         </div>
 
         <div
@@ -87,7 +87,7 @@ export function ContentAddressDemo({ caption }: Props) {
         >
           {sameAsBaseline ? (
             <p className="text-[13px] text-[color:var(--fg)] m-0 leading-6">
-              같은 내용 → 같은 주소. 내용 주소 저장소의 다른 절반이다.
+              같은 내용이면 같은 digest. 이게 규칙의 나머지 절반이에요.
             </p>
           ) : (
             <>
@@ -97,8 +97,8 @@ export function ContentAddressDemo({ caption }: Props) {
                 <strong className="font-semibold">{bits}</strong>/{TOTAL_BITS}
               </p>
               <p className="text-[13px] text-[color:var(--muted)] m-0 mt-1 leading-6">
-                한 글자를 바꿨는데 절반쯤이 뒤집힌다. 조금 비슷한 주소라는 건
-                없어서, digest 비교가 곧 내용 비교다.
+                한 글자를 바꿨는데 절반쯤이 뒤집혔어요. 조금 비슷한 digest라는 건
+                없어서 digest 비교가 곧 내용 비교입니다.
               </p>
             </>
           )}

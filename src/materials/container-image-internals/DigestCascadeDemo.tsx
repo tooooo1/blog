@@ -7,8 +7,8 @@ import "./parcel.css";
 type Path = "push" | "load";
 
 const PATHS: { value: Path; label: string; hint: string }[] = [
-  { value: "push", label: "--push", hint: "BuildKit이 레지스트리로 직송" },
-  { value: "load", label: "--load", hint: "데몬에 배달 → 데몬이 재압축해서 push" },
+  { value: "push", label: "--push", hint: "BuildKit이 레지스트리로 바로 올림" },
+  { value: "load", label: "--load", hint: "데몬에 배달 → 데몬이 다시 압축해서 올림" },
 ];
 
 interface Props {
@@ -25,7 +25,7 @@ export function DigestCascadeDemo({ caption }: Props) {
       <div className="rounded-2xl border border-[color:var(--border-strong)] bg-[color:var(--surface)] overflow-hidden">
         <fieldset className="border-0 m-0 p-5 pb-4 border-b border-[color:var(--border-strong)]">
           <legend className="float-left w-full text-[13px] text-[color:var(--muted)] mb-3 px-0">
-            빌드 산출물을 어디로 내보내는가
+            빌드 결과물을 어디로 내보내는가
           </legend>
           <div className="clear-both flex flex-wrap gap-2">
             {PATHS.map(({ value, label, hint }) => (
@@ -84,8 +84,8 @@ export function DigestCascadeDemo({ caption }: Props) {
 
         <div className="px-5 py-4 border-t border-[color:var(--border-strong)] bg-[color:var(--surface-2)]">
           <p className="text-[13px] text-[color:var(--fg)] m-0 leading-6">
-            비압축 tar 내용의 digest는{" "}
-            <strong className="font-semibold">두 경로에서 완전히 동일하다</strong>
+            압축하기 전 tar 내용의 digest는{" "}
+            <strong className="font-semibold">두 경로에서 완전히 같아요</strong>
           </p>
           <ul className="list-none p-0 m-0 mt-1.5 flex flex-col gap-0.5">
             {LAYERS.map((layer) => (
@@ -100,8 +100,8 @@ export function DigestCascadeDemo({ caption }: Props) {
           </ul>
           <p className="text-[13px] text-[color:var(--muted)] m-0 mt-2 leading-6">
             {changed
-              ? "파일 내용은 그대로라 컨테이너를 띄우면 같은 앱이 돈다. 달라진 건 포장지의 지문뿐이다."
-              : "BuildKit이 만든 바이트가 그대로 올라가므로 빌드 로그의 digest와 레지스트리의 digest가 일치한다."}
+              ? "파일 내용은 그대로라 컨테이너를 띄우면 같은 앱이 돕니다. 달라진 건 압축한 파일의 digest뿐이에요."
+              : "BuildKit이 만든 바이트가 그대로 올라가니까 빌드 로그의 digest와 레지스트리의 digest가 일치합니다."}
           </p>
         </div>
       </div>
@@ -167,7 +167,7 @@ function Row({ label, value, digest, pill, indent, changed }: RowProps) {
             : "text-[color:var(--muted)]"
         }`}
       >
-        {changed ? "달라짐" : "동일"}
+        {changed ? "달라짐" : "같음"}
       </span>
     </div>
   );
