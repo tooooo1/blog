@@ -107,7 +107,7 @@ export function GzipByteDiffDemo({ caption }: Props) {
 
   const summary =
     stream.level === BASELINE_LEVEL
-      ? "기준선. BuildKit이 압축한 그 바이트"
+      ? "기준선. 다른 설정은 이 바이트와 비교합니다"
       : stream.diffCount === 1
         ? `다른 바이트 1개 · 오프셋 ${stream.firstDiff}(헤더 안) · 길이는 같음`
         : `다른 바이트 ${stream.diffCount.toLocaleString()}개 · 오프셋 ${stream.firstDiff}부터 · 길이 ${stream.bytes.toLocaleString()}B`;

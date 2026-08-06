@@ -2,7 +2,8 @@
   gzip 스트림 3종의 실제 바이트. base64로 구워 두고 gzipStreams.test.ts가
   같은 레시피로 재압축해 대조한다 — 화면에 그려지는 격자가 곧 테스트가 재생성한 바이트다.
 
-  기준선은 level 9(BuildKit이 압축한 것)이고 firstDiff·diffCount는 그것과의 차이다.
+  기준선은 level 9이고 firstDiff·diffCount는 그것과의 차이다. 어느 레벨이 BuildKit·데몬의
+  실제 설정인지는 확인하지 않았다 — 데모가 보이는 건 "설정이 다르면 바이트가 갈린다"뿐이다.
 
   이 데모가 주장하지 않는 것: "docker의 gzip과 BuildKit의 gzip이 헤더 1바이트만 다르다".
   digests.ts가 밝힌 대로 페이로드는 결정적 대역물이다. 데모가 말하는 것은

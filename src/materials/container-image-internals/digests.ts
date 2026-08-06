@@ -2,8 +2,10 @@
   digest 값은 전부 실제로 계산한 것이다 — 손으로 적은 가짜가 아니다.
   digests.test.ts가 아래 레시피를 그대로 재계산해 이 파일의 값과 대조한다.
 
-    레이어 페이로드 → gzip(level 9) = --push 경로  (BuildKit이 압축한 바이트)
-                    → gzip(level 6) = --load 경로  (데몬이 재압축한 바이트)
+    레이어 페이로드 → gzip(level 9) = --push 경로
+                    → gzip(level 6) = --load 경로 (재압축된 쪽)
+    두 레벨은 "압축하는 쪽이 다르면 바이트가 갈린다"를 보이기 위한 대역이다.
+    BuildKit·데몬의 실제 gzip 설정이 이 값이라고 주장하지 않는다.
     manifest JSON은 "압축된" 레이어의 digest+size를 나열하므로,
     레이어 바이트가 갈리면 manifest 내용도 갈리고 따라서 manifest digest도 갈린다.
 
