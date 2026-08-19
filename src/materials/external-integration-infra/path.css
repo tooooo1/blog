@@ -1,0 +1,53 @@
+/*
+  이 글 전용 주제색. globals.css로 올리지 않는다 — 이 폴더를 지우면 색도 같이 사라져야 한다.
+
+  파랑·빨강 계열은 container-image-internals/parcel.css와 osi wire.css에서 확인된 쌍을
+  그대로 가져왔다. 초록 면(--t-ok-soft)만 신규 — Open Color green-1 계열로,
+  그 위 --t-ok-text 명도비는 라이트 6.3 · 다크 7.0 근사(수기 계산)로 AA를 넘긴다.
+
+  규칙: 주제색은 material <figure> 안에서만 존재한다. 본문·크롬 금지.
+  정보는 글자 라벨이 싣고 색은 그 중복 채널이다.
+
+  검사 (비어야 통과):
+    find app src -type f \( -name '*.tsx' -o -name '*.ts' -o -name '*.css' \) -print0 \
+      | xargs -0 grep -l -- '--t-' | grep -v '^src/materials/'
+*/
+
+.m-path {
+  /* "통과·허용" 글자와 면 */
+  --t-ok-text: #166534;
+  --t-ok-soft: #d3f9d8;
+  /* "막힘·의심" 글자와 면 */
+  --t-warn-text: #b02525;
+  --t-warn-soft: #ffe3e3;
+  /* 정보 없는 기본 면(액터·서버 칩) */
+  --t-cell: #d0ebff;
+  /* 화살표·스트로크 전용 파랑 */
+  --t-line: #228be6;
+}
+
+.dark .m-path {
+  --t-ok-text: #4ade80;
+  --t-ok-soft: #143c22;
+  --t-warn-text: #ff8787;
+  --t-warn-soft: #4a1f1f;
+  --t-cell: #1b3a5c;
+  --t-line: #4dabf7;
+}
+
+/* 화살표가 그려지는 전환과 라벨 등장 — 움직임은 이 둘뿐이고,
+   감속 선호 환경에서는 전환 없이 상태만 바뀐다 */
+.m-path .t-draw {
+  transition:
+    stroke-dashoffset 700ms ease,
+    opacity 300ms ease;
+}
+.m-path .t-pop {
+  transition: opacity 300ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .m-path .t-draw,
+  .m-path .t-pop {
+    transition: none;
+  }
+}

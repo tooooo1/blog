@@ -12,12 +12,11 @@
   동일 — 단일 동적 라우트의 성질이다). 자료가 수십 개로 늘어 공용 청크가 커지면
   데모를 next/dynamic(ssr:false) 래퍼로 감싸 클라이언트에서만 지연 로드하는 쪽으로 올린다.
 */
-export const MATERIALS: Record<
-  string,
-  () => Promise<Record<string, unknown>>
-> = {
-  "container-image-internals": () => import("./container-image-internals"),
-};
+export const MATERIALS: Record<string, () => Promise<Record<string, unknown>>> =
+  {
+    "external-integration-infra": () => import("./external-integration-infra"),
+    "container-image-internals": () => import("./container-image-internals"),
+  };
 
 export async function getMaterials(
   slug: string
