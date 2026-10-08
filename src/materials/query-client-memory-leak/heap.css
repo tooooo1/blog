@@ -1,0 +1,62 @@
+/*
+  이 글 전용 주제색. globals.css로 올리지 않는다 — 이 폴더를 지우면 색도 같이 사라져야 한다.
+
+  파랑·빨강·초록 면은 external-integration-infra/path.css의 값을 그대로 가져왔다.
+  그 위 글자 명도비는 path.css의 계산을 따른다.
+
+  규칙: 주제색은 material <figure> 안에서만 존재한다. 본문·크롬 금지.
+  정보는 글자 라벨이 싣고 색은 그 중복 채널이다.
+
+  검사 (비어야 통과):
+    find app src -type f \( -name '*.tsx' -o -name '*.ts' -o -name '*.css' \) -print0 \
+      | xargs -0 grep -l -- '--t-' | grep -v '^src/materials/'
+*/
+
+.m-heap {
+  /* "회수됨·정상" 글자와 면 */
+  --t-ok-text: #166534;
+  --t-ok-soft: #d3f9d8;
+  /* "붙잡힘·실패" 글자와 면 */
+  --t-warn-text: #b02525;
+  --t-warn-soft: #ffe3e3;
+  /* 정보 없는 기본 면 */
+  --t-cell: #d0ebff;
+  /* 화살표·스트로크 전용 파랑 */
+  --t-line: #228be6;
+}
+
+.dark .m-heap {
+  --t-ok-text: #4ade80;
+  --t-ok-soft: #143c22;
+  --t-warn-text: #ff8787;
+  --t-warn-soft: #4a1f1f;
+  --t-cell: #1b3a5c;
+  --t-line: #4dabf7;
+}
+
+/* 움직임은 등장·이동·늘어남·선 그리기뿐이고,
+   감속 선호 환경에서는 전환 없이 상태만 바뀐다 */
+.m-heap .t-pop {
+  transition: opacity 300ms ease;
+}
+.m-heap .t-move {
+  transition:
+    transform 800ms ease,
+    opacity 800ms ease;
+}
+.m-heap .t-grow {
+  transform-box: fill-box;
+  transform-origin: 0 50%;
+  transition: transform 900ms ease;
+}
+.m-heap .t-series {
+  transition: stroke-dashoffset 1600ms linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .m-heap .t-pop,
+  .m-heap .t-move,
+  .m-heap .t-grow,
+  .m-heap .t-series {
+    transition: none;
+  }
+}

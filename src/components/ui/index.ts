@@ -25,4 +25,5 @@ export { Hr } from "./hr";
 // Blog-specific components
 export { Callout, AhaPoint, InfoBox, Warning, Tip } from "./callout";
 export { SourceLink } from "./source-link";
+export { Hint } from "./hint";
 export { Timeline, TimelineItem } from "./timeline";

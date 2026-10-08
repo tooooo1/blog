@@ -16,6 +16,7 @@ export const MATERIALS: Record<string, () => Promise<Record<string, unknown>>> =
   {
     "external-integration-infra": () => import("./external-integration-infra"),
     "container-image-internals": () => import("./container-image-internals"),
+    "query-client-memory-leak": () => import("./query-client-memory-leak"),
   };
 
 export async function getMaterials(
