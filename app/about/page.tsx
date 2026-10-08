@@ -1,8 +1,9 @@
 import { SITE_CONFIG } from "@/constants/site";
 import { ProfileStructuredData } from "@/components/StructuredData";
 
-const OG_TITLE = "여러 앱 환경 위에서 웹뷰를 만듭니다.";
-const DESCRIPTION = "프론트엔드 개발자 정충일입니다.";
+const OG_TITLE = "웹과 앱을 만들고, 쓰이는지 살펴봅니다.";
+const DESCRIPTION =
+  "프론트엔드 개발자 정충일입니다. 웹과 앱을 개발하며, 사용자 반응과 지표를 보고 다음에 고칠 일을 찾습니다.";
 
 const ogImage = `${SITE_CONFIG.url}/api/og?title=${encodeURIComponent(OG_TITLE)}`;
 
@@ -48,19 +49,26 @@ export default function AboutPage() {
         <p className="mt-3 text-lg text-[color:var(--muted)]">{OG_TITLE}</p>
       </header>
 
-      <div className="mt-6 leading-relaxed">
+      <div className="mt-6 space-y-4 leading-relaxed">
         <p>
-          웰로의 프론트엔드를 혼자 맡고 있습니다. 전에는 카카오브레인에서
-          인턴으로 일했습니다.
+          웰로에서 프론트엔드를 맡고 있습니다. 사용자 웹과 어드민, 제휴 서비스의
+          웹뷰를 만들었고, React Native로 앱을 개발했습니다. 전에는
+          카카오브레인에서 인턴으로 일했습니다.
         </p>
         <p>
-          좋은 코드를 좋아하고, 그 코드가 숫자를 바꾸는 순간을 더 좋아합니다.
+          화면을 만들다 보면 API나 네트워크, 빌드와 배포까지 따라가야 할 때가
+          있습니다. 문제가 생기면 코드와 요청 흐름을 따라 원인을 좁히고, 필요한
+          부분은 동료와 함께 확인합니다. 그 과정에서 알게 된 것을 글로 남깁니다.
         </p>
-        <p>요즘은 코드를 스스로 고치는 파이프라인을 설계합니다.</p>
+        <p>
+          만들고 나서는 사람들이 어떻게 쓰는지 살펴봅니다. 검색으로 얼마나
+          찾아오는지, 기능을 쓰다가 어디서 막히는지, 어떤 오류가 나는지 보고
+          다음에 고칠 일을 찾습니다.
+        </p>
       </div>
 
       <div className="mt-6 leading-relaxed">
-        <p className="font-medium">코드는 적게 · 측정은 먼저 · 실수는 구조로</p>
+        <p>이곳에는 일하며 배운 것과, 아직 답을 찾고 있는 생각들을 씁니다.</p>
         <p className="mt-6 text-[color:var(--muted)]">
           재미있는 문제가 있다면 언제든 —{" "}
           <a
